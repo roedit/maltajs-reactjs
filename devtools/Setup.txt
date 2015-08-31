@@ -1,0 +1,4 @@
+For the applications setup we need to install:
+1 Node - https://nodejs.org/
+2 Ruby - https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
+3 Sass - win+r -> cmd -> "cd C:\Ruby22\bin" -> “gem install sass”
