@@ -99,16 +99,14 @@ module.exports = function (grunt) {
 
        // WATCHES
         watch: {
-            scripsAll: {
+            scriptsAll: {
                 files: [
                     '../source/js/maltaJsApp.js',
                     '../source/js/**/*.js'
                 ],
                 tasks: [
-                    'concat:shared_js',
                     'clean:jsClean',
-                    'browserify:jsScrips',
-                    'clean:tempJsClean'
+                    'concat:shared_js'
                 ]
             },
             sassAll: {
