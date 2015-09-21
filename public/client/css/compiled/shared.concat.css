@@ -3,6 +3,47 @@
 
 /*# sourceMappingURL=testAgain.css.map */
 
+.menu li {
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  padding: 10px; }
+
+.header div,
+.header ul {
+  display: inline-block;
+  vertical-align: top; }
+
+.logo {
+  padding: 25px 150px; }
+
+.panel {
+  height: 350px;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white; }
+
+.home {
+  background-color: #B26375; }
+
+.subscribe {
+  background-color: #C5736B; }
+
+.sponsors {
+  background-color: #922911; }
+
+.schedule {
+  background-color: #C27C6B; }
+
+.speakers {
+  background-color: #DAB2A8; }
+
+.location {
+  background-color: #AA4E39; }
+
+/*# sourceMappingURL=main.css.map */
+
 .test {
   background-color: yellow;
   border: 1px solid grey; }

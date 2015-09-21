@@ -1,2 +1,2 @@
 var mainContainer = document.getElementById('main');
-React.render(<App />, mainContainer);
+React.render(<App/>, mainContainer);
