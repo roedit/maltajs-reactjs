@@ -2,3 +2,27 @@ For the applications setup we need to install:
 1 Node - https://nodejs.org/
 2 Ruby - https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
 3 Sass - win+r -> cmd -> "cd C:\Ruby22\bin" -> “gem install sass”
+
+For the server setup we need to: 
+1 Create a digitalocean account - www.digitalocean.com
+2 Install putty&puttygen and generate a public key - also save the private key.
+3 Create the droplet with the public ssh key generated from puttygen.
+4 Set the putty connection based on the ssh private key saved on your computer.
+5 Change the droplet password - receive an email with the new password.
+6 Connect to the droplet console and change the default password.
+7 Install filezilla and set up the connection based on the username and password just updated.
+8 Install forever
+sudo npm install -g forever
+9 Create a new user :
+sudo useradd --create-home -s /bin/bash username
+sudo adduser username sudo
+sudo passwd username 
+10 Copy from root .ssh folder in home/username folder
+12 Connect with the new username
+13 Install flightplan
+sudo npm install -g flightplan 
+14 Set up the flightplan file from
+
+Don't forget:
+Nginx - commands to install
+NS and DNS setup 
