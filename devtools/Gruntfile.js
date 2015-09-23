@@ -88,6 +88,9 @@ module.exports = function (grunt) {
             },
             sassClean: {
                 src: ['../public/client/css/temp-shared']
+            },
+            sassCacheClean: {
+                src: ['./.sass-cache']
             }
         },
         browserify: {
@@ -115,7 +118,8 @@ module.exports = function (grunt) {
                     'clean:cssClean',
                     'sass:all',
                     'concat:css_shared',
-                    'clean:sassClean'
+                    'clean:sassClean',
+                    'clean:sassCacheClean'
                 ]
             }
         }
@@ -134,7 +138,9 @@ module.exports = function (grunt) {
         // Concat the css generated
         'concat:css_shared',
         // Clean the generated css
-        'clean:sassClean'
+        'clean:sassClean',
+        // Clean the temporary sass
+        'clean:sassCacheClean'
         // Browserify the concatenated files
         //'browserify:jsScripts',
         // Clean the temporary concat
