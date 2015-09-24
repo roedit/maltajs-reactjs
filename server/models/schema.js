@@ -4,10 +4,10 @@ var mongoose = require('../../devtools/node_modules/mongoose'),
 Subscribers Schema
  */
 var subscriberSchema = new Schema({
-    subscriberFirstName: { type: String, ref: 'subscriberFirstName' },
-    subscriberLastName: {type: String, ref: 'subscriberLastName'},
-    subscriberCompany: {type: String, ref: 'subscriberCompany'},
-    subscriberEmail: {type: String, ref: 'subscriberEmail', required: true}
+    subscriberFirstName: { type: String },
+    subscriberLastName: {type: String },
+    subscriberCompany: {type: String },
+    subscriberEmail: {type: String, required: true}
 });
 var subscriber = mongoose.model('subscriber', subscriberSchema);
 

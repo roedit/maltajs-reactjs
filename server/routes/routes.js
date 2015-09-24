@@ -6,18 +6,12 @@ module.exports= function(app) {
      * http://localhost:3000/api/subscribers
      */
     app.get('/api/subscribers', function(req, res) {
-        var populateQuery = [
-                {path: 'subscriberFirstName', select: 'subscriberFirstName'},
-                {path: 'subscriberLastName', select: 'subscriberLastName'},
-                {path: 'subscriberCompany', select: 'subscriberCompany'},
-                {path: 'subscriberEmail', select: 'subscriberEmail'}],
-            query = model.Subscribers.find();
-        query.populate(populateQuery);
+        var query = model.Subscribers.find();
+
         query.exec(function(err,subscribers){
-            console.log("Here");
+            console.log(subscribers);
             res.json({text: 'Entire subscribers list'}, subscribers);
             res.end();
-            console.log("endHere");
         });
     });
 
@@ -41,7 +35,6 @@ module.exports= function(app) {
             }
             res.json({ message: 'Subscriber successfully added', subscriber: subscriber });
             res.end();
-            Console.log("Added!!");
         });
     });
 };
