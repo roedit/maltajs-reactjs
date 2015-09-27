@@ -1,34 +1,16 @@
 /** @jsx react.dom */
-// Flux cart view
+
 var App = React.createClass({
-    onClick: function(target, e){
-    	console.log(target, e);
-    
-    	$('html, body').animate({
-    		scrollTop : $(e.target.hash).position().top
-    	  }, 800);
-    	
-    	e.preventDefault();
-  	},
     // React module
-    // Our app will have a single module
+ 
     render: function() {
         return (
         	<div id="container">
-        		<div className="header col-xs-12 col-sm-12 col-md-12">
-        			<div className="logo">Logo</div>
-		        	
-		        	<ul className="menu"> 
-		        		<li><a href="#home" data-url='header' onClick={this.onClick.bind(null, 'target')} value='Home section'>Home</a></li>
-                        <li><a href="#subscribe" data-url='subscribe' onClick={this.onClick.bind(null, 'target')} value='Subscribe'>Subscribe</a></li>
-		        		<li><a href="#schedule" data-url='schedule' onClick={this.onClick.bind(null, 'target')} value='Schedule'>Schedule</a></li>
-						<li><a href="#speakers" data-url='speakers' onClick={this.onClick.bind(null, 'target')} value='Speakers'>Speakers</a></li>
-						<li><a href="#sponsors" data-url='sponsors' onClick={this.onClick.bind(null, 'target')} value='Sponsors'>Sponsors</a></li>
-		        		<li><a href="#location" data-url='location' onClick={this.onClick.bind(null, 'target')} value='Location'>Location</a></li>
-		        	</ul>
-		        </div>
-
-        		<section id="home" className="row home">Header Section</section>
+                <Header />
+        		<section id="home" className="row home">
+                    <h2>MaltaJS conference</h2>
+                    <h3>Javascript focused community in Malta</h3>
+                </section>
                 <section id="subscribe" className="row subscribe">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
                         <h4>Subscribe</h4>
@@ -48,11 +30,120 @@ var App = React.createClass({
 					<Speakers />
 				</section>
         		<section id="sponsors" className="row sponsors">Sponsors Section</section>
-        		<section id="location" className="row location">Location Section</section>
+        		<LocationSection />
         	</div>
         );
     }
 });
+
+/**
+ * Header section
+ */
+var Header = React.createClass({
+	onClick: function(target, e){
+    	console.log(target, e);
+    
+    	$('html, body').animate({
+    		scrollTop : $(e.target.hash).position().top
+    	  }, 800);
+    	
+    	e.preventDefault();
+  	},
+    render: function(){
+        return (
+            <header className="header col-xs-12 col-sm-12 col-md-12 header-row">
+            	<nav id='menu' role="navigation">
+	    			<div className="logo"></div>
+		        	
+		        	<ul className="menu"> 
+		        		<li><a href="#home" data-url='header' onClick={this.onClick.bind(null, 'target')} value='Home section'>Home</a></li>
+	                    <li><a href="#subscribe" data-url='subscribe' onClick={this.onClick.bind(null, 'target')} value='Subscribe'>Subscribe</a></li>
+		        		<li><a href="#schedule" data-url='schedule' onClick={this.onClick.bind(null, 'target')} value='Schedule'>Schedule</a></li>
+						<li><a href="#speakers" data-url='speakers' onClick={this.onClick.bind(null, 'target')} value='Speakers'>Speakers</a></li>
+						<li><a href="#sponsors" data-url='sponsors' onClick={this.onClick.bind(null, 'target')} value='Sponsors'>Sponsors</a></li>
+		        		<li><a href="#location" data-url='location' onClick={this.onClick.bind(null, 'target')} value='Location'>Location</a></li>
+		        	</ul>
+	        	</nav>
+		    </header>
+        );
+    }
+});
+
+
+/**
+ * Location section
+ */
+
+ // Google maps api key
+ // AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ
+var LocationSection = React.createClass({
+	 getDefaultProps: function () {
+	        return {
+	            initialZoom: 17,
+	            mapCenterLat: 35.897705, 
+	            mapCenterLng: 14.494386
+	        };
+	    },
+	    componentDidMount: function (rootNode) {
+	    	var image = {
+	    		url: 'client/images/map_marker.png',
+			    // This marker is 20 pixels wide by 32 pixels high.
+			    size: new google.maps.Size(30, 30),
+			    // The origin for this image is (0, 0).
+			    origin: new google.maps.Point(0, 0),
+			    // The anchor for this image is the base of the flagpole at (0, 32).
+			    anchor: new google.maps.Point(0, 32)
+	    	};
+
+	    	var contentString = '<div id="content">'+
+		        '<div id="location-details">'+
+			      '</div>'+
+				      '<h1 id="firstHeading" class="firstHeading"><b>Location Details:</b></h1>'+
+					      '<div id="bodyContent">'+
+						      '<p>Betsson Experience Centre</p>'+
+						      '<p>8th Floor</p>'+
+					      '</div>'+
+			      '</div>'+
+			    '</div>';
+
+			var infowindow = new google.maps.InfoWindow({
+			   content: contentString
+			});
+
+			
+	    	
+	        var mapOptions = {
+	            center: this.mapCenterLatLng(),
+	            zoom: this.props.initialZoom
+	        },
+	       
+	        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	        var marker = new google.maps.Marker({
+	        	position: this.mapCenterLatLng(), 
+	        	title: 'MaltaJS', 
+	        	map: map,
+	        	draggable: false,
+	        	icon: image
+	        });
+
+	        marker.addListener('click', function() {
+			   infowindow.open(map, marker);
+			});
+	        this.setState({map: map});
+	    },
+	    mapCenterLatLng: function () {
+	        var props = this.props;
+	        return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
+	    },
+	    render: function () {
+	        return (
+	        	<section id="location" className="row location">Location Section
+	           	 <div className='map-gic' id='map'></div>
+	            </section>
+	        );
+	    }
+});
+
 /**
  * SCHEDULE LIST- This is the main content for the schedule page
  */
@@ -218,39 +309,116 @@ var Speakers = React.createClass({
             data: [{
                 0: {
                     id: 0,
-                    name: 'Andrei Toma',
-                    image: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
+                    name: 'Daniel Massa',
+                    image: '/client/images/speakers/daniel_massa_betsson.jpg',
+                    title: 'Frontend Development Lead at Betsson.',
                     job: {
-                        position: 'Organic Performance Client Development Lead at Forward3D',
-                        url: 'www.google.com',
-                        logo: 'www.image.com',
-                        description: 'Works at Forward3D, Europe\'s largest independent digital agency.'
+                        position: 'Frontend Development Lead at',
+                        company: 'Betsson Group',
+                        companyUrl: 'http://about.betsson.com/en/company-information/',
+                        companyLogo: '/client/images/companies/betsson.jpg',
+                        description: 'Daniel Massa is the Frontend Development Lead at Betsson Group. He is focused on optimizing digital performance with strong focus on business goals. Data, analytics and performance run through his veins. He is committed to always providing with quality, security and state-of-the-art functionality. At Betsson he works with a team of highly specialized professionals to push the limits of on-line gaming. '
                     },
-                    description: 'Marketing consultant experienced in developing technical SEO & user engagement strategies for enterprise websites. Industry experience in ecommerce, travel aggregators, online market places, luxury retail, and finance. Before this, I created events and marketing communications for companies such as Hewlett Packard and Skanska..'
+                    social: {
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAS-QWEBI4Pf1M76DMuXVA6mUj3QMCD0nyQ&authType=NAME_SEARCH&authToken=bkg6&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A79577441%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443375879509%2Ctas%3ADaniel%20massa',
+                        tweeter: '',
+                        website: ''
+                    }
                 },
                 1: {
                     id: 1,
-                    name: 'Cristian Oana',
+                    name: 'Andrei Toma',
                     image: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
+                    title: 'Partner and Lawyer at Schonherr.',
                     job: {
-                        position: 'Organic Performance Client Development Lead at Forward3D',
-                        url: 'www.google.com',
-                        logo: 'www.image.com',
+                        position: 'Organic Performance Client Development Lead at',
+                        company: 'Forward3D',
+                        companyUrl: 'http://youtube.com',
+                        companyLogo: 'https://ulrikbengtsson.files.wordpress.com/2013/08/screen-shot-2013-08-20-at-19-24-50.png',
+                        url: 'http://google.com',
+                        logo: 'http://image.com',
                         description: 'Works at Forward3D, Europe\'s largest independent digital agency.'
                     },
-                    description: 'Marketing consultant experienced in developing technical SEO & user engagement strategies for enterprise websites. Industry experience in ecommerce, travel aggregators, online market places, luxury retail, and finance. Before this, I created events and marketing communications for companies such as Hewlett Packard and Skanska..'
+                    social: {
+                        linkedin: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974',
+                        tweeter: '',
+                        website: ''
+                    }
                 },
                 2: {
                     id: 2,
                     name: 'Bogdan Dumitriu',
-                    image: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
+                    image: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/046/2ad/36bfc2e.jpg',
+                    title: 'Partner and Lawyer at Schonherr.',
                     job: {
-                        position: 'Organic Performance Client Development Lead at Forward3D',
-                        url: 'www.google.com',
-                        logo: 'www.image.com',
-                        description: 'Works at Forward3D, Europe\'s largest independent digital agency.'
+                        position: 'Organic Performance Client Development Lead at',
+                        company: 'Forward3D',
+                        companyUrl: 'http://www.youtube.com',
+                        companyLogo: 'https://ulrikbengtsson.files.wordpress.com/2013/08/screen-shot-2013-08-20-at-19-24-50.png',
+                        url: 'http://www.google.com',
+                        logo: 'http://www.image.com',
+                        description: 'Marketing consultant experienced in developing technical SEO & user engagement strategies for enterprise websites. Industry experience in ecommerce, travel aggregators, online market places, luxury retail, and finance. Before this, I created events and marketing communications for companies such as Hewlett Packard and Skanska..'
                     },
-                    description: 'Marketing consultant experienced in developing technical SEO & user engagement strategies for enterprise websites. Industry experience in ecommerce, travel aggregators, online market places, luxury retail, and finance. Before this, I created events and marketing communications for companies such as Hewlett Packard and Skanska..'
+                    social: {
+                        linkedin: '',
+                        tweeter: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974',
+                        website: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974'
+                    }
+                }
+            },{
+                0: {
+                    id: 4,
+                    name: 'Call for Speakers',
+                    image: '/client/images/speakers/search_speaker.jpg',
+                    title: 'Do you want to participate as speaker at the conference?',
+                    job: {
+                        position: 'Contact: andrei.toma()betssongroup.com',
+                        company: '',
+                        companyUrl: '',
+                        companyLogo: '',
+                        description: 'Maltajs invites you to participate as a speaker at our next conference on November 07, 2015 @ Betsson Experience Centre. Please give us some details about yourself and the topic you would like to present. Regarding your presentation, it should be 45 minutes long, on any IT development topic you have experience with. For example, javascript, testing, business analysis, project management.'
+                    },
+                    social: {
+                        linkedin: '',
+                        tweeter: '',
+                        website: ''
+                    }
+                },
+                1: {
+                    id: 5,
+                    name: 'Call for Speakers',
+                    image: '/client/images/speakers/search_speaker.jpg',
+                    title: 'Do you want to participate as speaker at the conference?',
+                    job: {
+                        position: 'Contact: andrei.toma()betssongroup.com',
+                        company: '',
+                        companyUrl: '',
+                        companyLogo: '',
+                        description: 'Maltajs invites you to participate as a speaker at our next conference on November 07, 2015 @ Betsson Experience Centre. Please give us some details about yourself and the topic you would like to present. Regarding your presentation, it should be 45 minutes long, on any IT development topic you have experience with. For example, javascript, testing, business analysis, project management.'
+                    },
+                    social: {
+                        linkedin: '',
+                        tweeter: '',
+                        website: ''
+                    }
+                },
+                2: {
+                    id: 6,
+                    name: 'Call for Speakers',
+                    image: '/client/images/speakers/search_speaker.jpg',
+                    title: 'Do you want to participate as speaker at the conference?',
+                    job: {
+                        position: 'Contact: andrei.toma()betssongroup.com',
+                        company: '',
+                        companyUrl: '',
+                        companyLogo: '',
+                        description: 'Maltajs invites you to participate as a speaker at our next conference on November 07, 2015 @ Betsson Experience Centre. Please give us some details about yourself and the topic you would like to present. Regarding your presentation, it should be 45 minutes long, on any IT development topic you have experience with. For example, javascript, testing, business analysis, project management.'
+                    },
+                    social: {
+                        linkedin: '',
+                        tweeter: '',
+                        website: ''
+                    }
                 }
             }]
         }
@@ -278,9 +446,61 @@ var Speakers = React.createClass({
  */
 var SpeakerProfile = React.createClass({
     render: function(){
+        var speakerImage = {
+            backgroundImage: 'url(' + this.props.data.image + ')'
+        };
+
         return (
-            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 speaker1">
-                {this.props.data.name}
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 speaker">
+                <div className="content">
+                    <div className="cardFront" style={speakerImage}></div>
+                    <div className="cardBack">
+                        <h6>
+                            {this.props.data.name}
+                        </h6>
+                        <p className="speakerPosition">
+                            {this.props.data.job.position}
+                            <a target="_blank" href={this.props.data.job.companyUrl}> {this.props.data.job.company} </a>
+                        </p>
+                        {(() => {
+                            if (this.props.data.social.linkedin !== '') {
+                                return (
+                                    <a className="linkedin" target="_blank" href={this.props.data.social.linkedin}></a>
+                                )
+                            }
+                        })()}
+                        {(() => {
+                            if (this.props.data.social.tweeter !== '') {
+                                return (
+                                    <a className="linkedin" target="_blank" href={this.props.data.social.tweeter}></a>
+                                )
+                            }
+                        })()}
+                        {(() => {
+                            if (this.props.data.social.website !== '') {
+                                return (
+                                    <a className="linkedin" target="_blank" href={this.props.data.social.website}></a>
+                                )
+                            }
+                        })()}
+                        <p className="speakerDescription">
+                            {this.props.data.job.description}
+                        </p>
+                    </div>
+                </div>
+                <div className="speakerInfo">
+                    <h6>
+                        {this.props.data.name}
+                    </h6>
+                    <p>
+                        {this.props.data.title}
+                    </p>
+                    <div className="speakersCompany">
+                        <a target="_blank" href={this.props.data.job.companyUrl}>
+                            <img src={this.props.data.job.companyLogo}/>
+                        </a>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -392,4 +612,6 @@ var Subscriber = React.createClass({
     }
 });
 var mainContainer = document.getElementById('main');
+
+
 React.render(<App/>, mainContainer);

@@ -21,6 +21,73 @@
 
 /*# sourceMappingURL=testAgain.css.map */
 
+.header-row {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 999;
+  padding: 0 20px;
+  height: 70px; }
+  .header-row .logo {
+    padding: 25px 25px;
+    background-image: url("../../images/logo.jpg");
+    background-size: cover;
+    width: 60px;
+    height: 60px; }
+  .header-row nav {
+    padding-top: 5px; }
+
+.menu {
+  float: right; }
+  .menu a {
+    font-size: 16px;
+    color: #323232;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    display: block;
+    position: relative; }
+  .menu li {
+    float: left;
+    display: block;
+    margin-left: 30px;
+    position: relative; }
+  .menu li a:hover {
+    background: #dc4e51;
+    color: #fff; }
+
+.home {
+  margin-top: 70px;
+  background-image: url("../../images/home_bg_top.jpg");
+  background-size: cover;
+  height: 450px;
+  color: #FFF;
+  background-repeat: no-repeat;
+  background-position: center center; }
+  .home h2 {
+    text-align: center;
+    margin-top: 130px;
+    font-weight: 700;
+    font-size: 55px; }
+  .home h3 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 35px; }
+
+/*# sourceMappingURL=header.css.map */
+
+.location {
+  background-color: #FFF;
+  height: 600px;
+  margin-bottom: 100px; }
+  .location .map-gic {
+    width: 100%;
+    height: 550px; }
+
+/*# sourceMappingURL=location.css.map */
+
 body * {
   font-size: 14px;
   font-family: 'Open Sans';
@@ -33,6 +100,9 @@ div {
   border: 0;
   margin: 0;
   vertical-align: baseline; }
+
+b {
+  font-weight: 700 !important; }
 
 .row {
   margin: 0;
@@ -52,20 +122,30 @@ div {
   display: inline-block;
   vertical-align: top; }
 
-.logo {
-  padding: 25px 150px; }
+.linkedin {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/social_media.png) 0 0;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 5px; }
 
-.home {
-  background-color: #B26375; }
+.twitter {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/social_media.png) 0 0;
+  margin-bottom: 10px;
+  margin-top: 10px; }
 
-.sponsors {
-  background-color: #922911; }
-
-.speakers {
-  background-color: #DAB2A8; }
-
-.location {
-  background-color: #AA4E39; }
+.website {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/social_media.png) 0 0;
+  margin-bottom: 10px;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=main.css.map */
 
@@ -171,10 +251,80 @@ div {
     font-size: 50px;
     font-weight: 700;
     margin-bottom: 45px; }
-  .speakers .speaker1 {
-    width: 300px;
-    height: 300px;
-    background-color: red; }
+  .speakers .speaker {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -o-perspective: 1000px;
+    -ms-perspective: 1000px;
+    display: block; }
+    .speakers .speaker .content {
+      position: relative;
+      width: 100%; }
+      .speakers .speaker .content:before {
+        content: "";
+        float: left;
+        padding-bottom: 100%;
+        text-overflow: ellipsis; }
+      .speakers .speaker .content:after {
+        content: "";
+        display: table;
+        clear: both; }
+      .speakers .speaker .content .cardFront {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        visibility: visible;
+        opacity: 1;
+        z-index: 1; }
+      .speakers .speaker .content .cardBack {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+        overflow: hidden;
+        z-index: 0; }
+        .speakers .speaker .content .cardBack h6 {
+          color: #000;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 10px; }
+        .speakers .speaker .content .cardBack .speakerPosition span {
+          font-weight: 600;
+          margin-bottom: 25px; }
+          .speakers .speaker .content .cardBack .speakerPosition span a {
+            font-weight: 600;
+            color: #000;
+            text-decoration: underline; }
+    .speakers .speaker .speakerInfo {
+      padding: 15px 20px;
+      width: 100%;
+      opacity: 1;
+      min-height: 171px; }
+      .speakers .speaker .speakerInfo h6 {
+        color: #000;
+        font-size: 20px;
+        font-weight: 600; }
+      .speakers .speaker .speakerInfo p {
+        color: #646464;
+        font-weight: 600;
+        margin-bottom: 25px; }
+      .speakers .speaker .speakerInfo .speakersCompany {
+        margin: 0 auto; }
+        .speakers .speaker .speakerInfo .speakersCompany img {
+          max-height: 50px;
+          width: auto;
+          display: inline-block; }
+
+.speakers .speaker:hover .content .cardFront {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: visibility 0.5s, opacity 0.5s linear;
+  -moz-transition: visibility 0.5s, opacity 0.5s linear;
+  -ms-transition: visibility 0.5s, opacity 0.5s linear;
+  -o-transition: visibility 0.5s, opacity 0.5s linear; }
 
 /*# sourceMappingURL=speakers.css.map */
 
