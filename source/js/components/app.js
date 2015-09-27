@@ -29,7 +29,7 @@ var App = React.createClass({
 					<Speakers />
 				</section>
         		<section id="sponsors" className="row sponsors">Sponsors Section</section>
-        		<section id="location" className="row location">Location Section</section>
+        		<LocationSection />
         	</div>
         );
     }
