@@ -66,7 +66,7 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        cwd: '../source/scss/modules',
+                        cwd: '../source/scss/components',
                         src: ['**/*.scss'],
                         dest: '../public/client/css/temp-shared',
                         ext: '.css'
