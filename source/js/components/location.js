@@ -43,7 +43,11 @@ var LocationSection = React.createClass({
 	    	
 	        var mapOptions = {
 	            center: this.mapCenterLatLng(),
-	            zoom: this.props.initialZoom
+	            zoom: this.props.initialZoom,
+	            scrollwheel: false,
+			    navigationControl: false,
+			    mapTypeControl: false,
+			    scaleControl: false
 	        },
 	       
 	        map = new google.maps.Map(document.getElementById('map'), mapOptions);
