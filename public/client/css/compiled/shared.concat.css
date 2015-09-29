@@ -119,26 +119,18 @@ b {
 
 .linkedin {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
+  width: 19px;
+  height: 19px;
+  background: url(../../images/media.png) -2px 0px;
   margin-bottom: 10px;
   margin-top: 10px;
   margin-right: 5px; }
 
-.twitter {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
-  margin-bottom: 10px;
-  margin-top: 10px; }
-
 .website {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
+  width: 19px;
+  height: 19px;
+  background: url(../../images/media.png) -2px -21px;
   margin-bottom: 10px;
   margin-top: 10px; }
 
