@@ -10,8 +10,8 @@ module.exports= function(app) {
 
         query.exec(function(err,subscribers){
             console.log(subscribers);
-            res.json({text: 'Entire subscribers list'}, subscribers);
-            res.end();
+            //res.json({text: 'Entire subscribers list'}, subscribers);
+            res.send('Hello Man');
         });
     });
 

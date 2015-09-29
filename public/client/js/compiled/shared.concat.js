@@ -29,7 +29,7 @@ var App = React.createClass({
 					</div>
 					<Speakers />
 				</section>
-        		<section id="sponsors" className="row sponsors">Sponsors Section</section>
+        	    <SponsorsSection />
         		<LocationSection />
         	</div>
         );
@@ -114,7 +114,11 @@ var LocationSection = React.createClass({
 	    	
 	        var mapOptions = {
 	            center: this.mapCenterLatLng(),
-	            zoom: this.props.initialZoom
+	            zoom: this.props.initialZoom,
+	            scrollwheel: false,
+			    navigationControl: false,
+			    mapTypeControl: false,
+			    scaleControl: false
 	        },
 	       
 	        map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -506,6 +510,29 @@ var SpeakerProfile = React.createClass({
     }
 });
 
+
+/**
+ * Header section
+ */
+var SponsorsSection = React.createClass({
+    render: function(){
+        return (
+            <section id="sponsors" className="row sponsors text-center">
+            	<h3>PARTNER WITH MaltaJs 2015</h3>
+            	<h6>Find out more about the opportunities to become one of the sponsors of MaltaJs in 2015.</h6>
+            	<a href="mailto:contact@maltajs.com" className="sponsor_button" data-text="GET IN TOUCH"><span>GET IN TOUCH</span></a>
+            	<div className='sponsors-logo row'>
+            		<p>Sponsors</p>
+	            	<a href="https://www.betsson.com/" target="_blank"> <img src="http://www.esportsbets24.com/wp-content/uploads/2015/06/betssonlogo.jpg" /> </a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="http://www.semdays.ro/wp-content/themes/blankslate/images/sponsors/retargeting.png" /> </a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSvit3lhnqrPdezou4noupdnI1M6bgnABNjAawlJzBWvbpF98oPN4SS8Bw" /> </a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="http://www.infobookmakers.com/images/brand/betsafe.jpeg" /> </a>
+            	</div>
+            </section>
+        );
+    }
+});
+
 /**
  * SUBSCRIBE FORM- This is the main content for the subscribe page
  */
@@ -520,6 +547,31 @@ var Subscribe = React.createClass({
     },
     addSubscriber: function(e){
         e.preventDefault();
+        var subscriber = {
+            subscriberFirstName: this.state.firstName,
+            subscriberLastName: this.state.lastName,
+            subscriberCompany: this.state.company,
+            subscriberEmail: this.state.email
+        };
+        $.ajax({
+            url: "/api/add-subscriber",
+            type: "POST",
+            dataType: "xml/html/script/json", // expected format for response
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+            data: subscriber,
+
+            complete: function(response) {
+                debugger
+            },
+
+            success: function(response) {
+                debugger
+            },
+
+            error: function(response) {
+                debugger
+            }
+        });
         //Push the properties to db
         console.log('User to be added:' + this.state.firstName + ' ' + this.state.lastName);
         this.setState({
@@ -546,23 +598,23 @@ var Subscribe = React.createClass({
             <form onSubmit={this.addSubscriber}>
                 <div className="row">
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="name" />
+                        <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="Name" />
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="surname" />
+                        <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="Surname" />
                     </div>
 
                     <div className="clearfix visible-xs-block"></div>
 
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="company"/>
+                        <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="Company"/>
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="email" />
+                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
                     </div>
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                    <button type="button" className="btn btn-danger register">Subscribe</button>
+                    <button className="btn btn-danger register">Subscribe</button>
                 </div>
             </form>
         );

@@ -12,6 +12,31 @@ var Subscribe = React.createClass({
     },
     addSubscriber: function(e){
         e.preventDefault();
+        var subscriber = {
+            subscriberFirstName: this.state.firstName,
+            subscriberLastName: this.state.lastName,
+            subscriberCompany: this.state.company,
+            subscriberEmail: this.state.email
+        };
+        $.ajax({
+            url: "/api/add-subscriber",
+            type: "POST",
+            dataType: "xml/html/script/json", // expected format for response
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+            data: subscriber,
+
+            complete: function(response) {
+                debugger
+            },
+
+            success: function(response) {
+                debugger
+            },
+
+            error: function(response) {
+                debugger
+            }
+        });
         //Push the properties to db
         console.log('User to be added:' + this.state.firstName + ' ' + this.state.lastName);
         this.setState({
@@ -38,23 +63,23 @@ var Subscribe = React.createClass({
             <form onSubmit={this.addSubscriber}>
                 <div className="row">
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="name" />
+                        <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="Name" />
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="surname" />
+                        <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="Surname" />
                     </div>
 
                     <div className="clearfix visible-xs-block"></div>
 
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="company"/>
+                        <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="Company"/>
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="email" />
+                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
                     </div>
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                    <button type="button" className="btn btn-danger register">Subscribe</button>
+                    <button className="btn btn-danger register">Subscribe</button>
                 </div>
             </form>
         );

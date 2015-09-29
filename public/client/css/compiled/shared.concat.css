@@ -16,11 +16,6 @@
 
 /*# sourceMappingURL=bootstrapOverwrite.css.map */
 
-.das {
-  background: deeppink; }
-
-/*# sourceMappingURL=testAgain.css.map */
-
 .header-row {
   position: fixed;
   width: 100%;
@@ -328,6 +323,49 @@ b {
 
 /*# sourceMappingURL=speakers.css.map */
 
+.sponsors {
+  background-color: #f0f0f0;
+  height: 550px; }
+  .sponsors .sponsor_button {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 45px;
+    margin: 25px 0px 80px 0px;
+    background: #dc4e51;
+    border: 1px solid #dc4e51;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    -webkit-backface-visibility: hidden; }
+  .sponsors .sponsor_button:hover {
+    background: #fff;
+    color: #dc4e51; }
+  .sponsors h3 {
+    font-size: 50px;
+    font-weight: 700;
+    color: #323232; }
+  .sponsors h6 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 25px; }
+  .sponsors img {
+    height: 100px;
+    width: auto; }
+  .sponsors a {
+    margin: 20px; }
+
+.sponsors-logo {
+  margin-top: 80px; }
+  .sponsors-logo p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333333; }
+
+/*# sourceMappingURL=sponsors.css.map */
+
 .subscribe {
   border-top: 1px solid #f2f2f2;
   margin-top: 35px;
@@ -344,8 +382,7 @@ b {
   .subscribe input {
     width: calc(100% - 30px);
     margin: 15px;
-    padding: 5px;
-    text-transform: capitalize; }
+    padding: 5px; }
   .subscribe .register {
     display: inline-block;
     text-align: center;
@@ -366,9 +403,3 @@ b {
       color: #dc4e51; }
 
 /*# sourceMappingURL=subscribe.css.map */
-
-.test {
-  background-color: yellow;
-  border: 1px solid grey; }
-
-/*# sourceMappingURL=test.css.map */
