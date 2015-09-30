@@ -7,8 +7,34 @@ var Subscribe = React.createClass({
             firstName: '',
             lastName: '',
             company: '',
-            email: ''
+            email: '',
+            confirm: {
+                display: 'none'
+            },
+            progressBar: {
+                height:'4px',
+                background: '#dc4e51;',
+                width:0,
+                position:'absolute'
+            }
         }
+    },
+    confirmSubscription(e){
+        this.setState({
+            confirm: {
+                display: 'none'
+            }
+        })
+    },
+    showProgress(e){
+        this.setState({
+            progressBar:{
+                height:'4px',
+                background: '#dc4e51;',
+                position:'absolute',
+                width: e + '%'
+            }
+        })
     },
     addSubscriber: function(e){
         e.preventDefault();
@@ -18,27 +44,27 @@ var Subscribe = React.createClass({
             subscriberCompany: this.state.company,
             subscriberEmail: this.state.email
         };
+        //Update the progress bar
+        this.showProgress(50);
         $.ajax({
             url: "/api/add-subscriber",
             type: "POST",
-            dataType: "xml/html/script/json", // expected format for response
             contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
             data: subscriber,
-
+            scope: this,
             complete: function(response) {
-                debugger
-            },
+                this.showProgress(0);
+            }.bind(this),
 
             success: function(response) {
-                debugger
-            },
+                this.showProgress(80);
+            }.bind(this),
 
             error: function(response) {
-                debugger
-            }
+                this.showProgress(80);
+            }.bind(this)
         });
         //Push the properties to db
-        console.log('User to be added:' + this.state.firstName + ' ' + this.state.lastName);
         this.setState({
             firstName: '',
             lastName: '',
@@ -80,6 +106,9 @@ var Subscribe = React.createClass({
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
                     <button className="btn btn-danger register">Subscribe</button>
+                </div>
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <div style={this.state.progressBar}></div>
                 </div>
             </form>
         );

@@ -113,7 +113,7 @@ var Schedule = React.createClass({
                 endHour: '15:45',
                 eventType: 'speaker',
                 speaker: {
-                    name: 'Daniel Mass, David Bonnuci',
+                    name: 'Daniel Massa, David Bonnuci',
                     img: '/client/images/speakers/daniel_massa.jpg',
                     topic: 'Predicting SEO growth in a environment of extreme uncertainty',
                     topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
@@ -127,7 +127,7 @@ var Schedule = React.createClass({
             {
                 startHour: '15:45',
                 endHour: '16:00',
-                eventTitle: 'FEEDBACK & CLOSING OF THE DAY',
+                eventTitle: 'PIZZA AND BEER',
                 eventType: 'heading'
             }]
         }

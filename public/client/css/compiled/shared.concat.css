@@ -16,6 +16,29 @@
 
 /*# sourceMappingURL=bootstrapOverwrite.css.map */
 
+.footer {
+  width: 100%;
+  height: 100px;
+  background-color: #f0f0f0;
+  padding-top: 25px; }
+  .footer .leftSide {
+    float: left;
+    margin-left: 10px;
+    padding-top: 20px; }
+    .footer .leftSide p {
+      color: #b5b5b5;
+      font-size: 10px; }
+  .footer .rightSide {
+    float: right;
+    margin-right: 20px;
+    text-align: left;
+    display: inline-block; }
+    .footer .rightSide p {
+      color: #777777;
+      font-size: 10px; }
+
+/*# sourceMappingURL=footer.css.map */
+
 .header-row {
   position: fixed;
   width: 100%;
@@ -57,7 +80,7 @@
   margin-top: 70px;
   background-image: url("../../images/home_bg_top.jpg");
   background-size: cover;
-  height: 450px;
+  min-height: 350px;
   color: #FFF;
   background-repeat: no-repeat;
   background-position: center center; }
@@ -65,7 +88,8 @@
     text-align: center;
     margin-top: 130px;
     font-weight: 700;
-    font-size: 55px; }
+    font-size: 55px;
+    padding-top: 50px; }
   .home h3 {
     text-align: center;
     font-weight: 700;
@@ -73,18 +97,16 @@
   .home p {
     text-align: center;
     margin-top: 30px; }
-    .home p .betssonLogo {
+    .home p .betssonHeader {
       width: 120px;
       height: 30px;
-      background: url(../../images/betsson_logo.png);
-      background-repeat: no-repeat;
-      margin-left: 10px; }
+      margin-left: 10px;
+      margin-top: -7px; }
 
 /*# sourceMappingURL=header.css.map */
 
 .location {
   background-color: #FFF;
-  height: 600px;
   margin-bottom: 100px; }
   .location h4 {
     color: #323232;
@@ -331,7 +353,7 @@ b {
 
 .sponsors {
   background-color: #f0f0f0;
-  height: 550px; }
+  min-height: 550px; }
   .sponsors .sponsor_button {
     text-align: center;
     color: #fff;

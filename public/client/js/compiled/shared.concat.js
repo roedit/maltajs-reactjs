@@ -8,13 +8,13 @@ var App = React.createClass({
         return (
         	<div id="container">
                 <Header />
-        		<section id="home" className="row home">
+        		<section id="home" className="row-fluid home">
                     <h2>MaltaJS conference</h2>
                     <h3>Javascript focused community in Malta</h3>
                     <p>
                         7th of NOVEMBER | BETSSON EXPERIENCE CENTER | BY
                         <a target="_blank" href="http://about.betsson.com/en/company-information/">
-                            <img className="betssonLogo"></img>
+                            <img className="betssonHeader" src="/client/images/betsson_logo.png"></img>
                         </a>
                     </p>
 
@@ -44,10 +44,32 @@ var App = React.createClass({
                     </div>
                     <Location />
                 </section>
+                <Footer />
         	</div>
         );
     }
 });
+/**
+ * Footer section
+ */
+var Footer = React.createClass({
+    render: function(){
+        return (
+            <footer className="footer">
+                <div className="leftSide">
+                    <p>Copyright &#9400; MaltaJs 2015 All Rights Reserved</p>
+                </div>
+                <div className="rightSide">
+                    <p>event by:</p>
+                    <a target="_blank" href="http://about.betsson.com/en/company-information/">
+                        <img className="betssonFooter" src="/client/images/betsson_logo.png"></img>
+                    </a>
+                </div>
+            </footer>
+        );
+    }
+});
+
 
 /**
  * Header section
@@ -156,6 +178,7 @@ var Location = React.createClass({
 	        );
 	    }
 });
+
 
 /**
  * SCHEDULE LIST- This is the main content for the schedule page
@@ -272,7 +295,7 @@ var Schedule = React.createClass({
                 endHour: '15:45',
                 eventType: 'speaker',
                 speaker: {
-                    name: 'Daniel Mass, David Bonnuci',
+                    name: 'Daniel Massa, David Bonnuci',
                     img: '/client/images/speakers/daniel_massa.jpg',
                     topic: 'Predicting SEO growth in a environment of extreme uncertainty',
                     topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
@@ -286,7 +309,7 @@ var Schedule = React.createClass({
             {
                 startHour: '15:45',
                 endHour: '16:00',
-                eventTitle: 'FEEDBACK & CLOSING OF THE DAY',
+                eventTitle: 'PIZZA AND BEER',
                 eventType: 'heading'
             }]
         }
@@ -419,7 +442,7 @@ var Speakers = React.createClass({
                         company: 'University of Malta',
                         companyUrl: 'http://www.um.edu.mt/',
                         companyLogo: '/client/images/companies/malta_university.jpg',
-                        description: 'Corand\'s personal motto is: the process of achieving goals is as important as the goal achieved. Director of iCreatemotion, Conrad is taking technology at the state of art. He always finds creative ways of how to involve young scientists and professionals while engaging with different sectors in society. In one his publications he\'s proposing p2p network to address the test scenario explosion problem.'
+                        description: 'Founder of iCreatemotion and Assistant Lecturer at the Department of Computer Information Systems within ICT - University of Malta, Conrad obtained his PhD at the Sheffield University, UK. His research interest are smart technology, enterprise applications, mobile applications and persuasive technology. He had contributed actively by increasing resources and opportunities for ICT students. As mentor on several successful projects, Conrad applied his knowledge on mobile technologies for workplace environments. Currently is a consultant for several companies in their initial stages who intend to adopt ERP solutions by providing advice on business processes analysis to optimize the current practices. Previously worked at Malta International Airport designing various solutions and providing support. Contributed to science communication projects such TechLab for SITC and is the vice president of IEEE Malta.'
                     },
                     social: {
                         linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAWE274BxBsLO_Q8LHvgdTum2R-osdpA8YY&authType=NAME_SEARCH&authToken=9Uxs&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A92593086%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443558388444%2Ctas%3Aconr',
@@ -565,6 +588,10 @@ var SpeakerProfile = React.createClass({
                 </div>
             </div>
         );
+    },
+    componentDidMount: function() {
+        var speakerCardBack = this.getDOMNode().childNodes[0].childNodes[1];
+        Ps.initialize(speakerCardBack);
     }
 });
 
@@ -575,7 +602,7 @@ var SpeakerProfile = React.createClass({
 var SponsorsSection = React.createClass({
     render: function(){
         return (
-            <section id="sponsors" className="row sponsors text-center">
+            <section id="sponsors" className="row-fluid sponsors text-center">
             	<h3>Partener with MaltaJs 2015</h3>
             	<h6>Find out more about the opportunities to become one of the sponsors of MaltaJs in 2015.</h6>
             	<a href="mailto:contact@maltajs.com" className="sponsor_button" data-text="GET IN TOUCH"><span>GET IN TOUCH</span></a>
@@ -600,8 +627,34 @@ var Subscribe = React.createClass({
             firstName: '',
             lastName: '',
             company: '',
-            email: ''
+            email: '',
+            confirm: {
+                display: 'none'
+            },
+            progressBar: {
+                height:'4px',
+                background: '#dc4e51;',
+                width:0,
+                position:'absolute'
+            }
         }
+    },
+    confirmSubscription(e){
+        this.setState({
+            confirm: {
+                display: 'none'
+            }
+        })
+    },
+    showProgress(e){
+        this.setState({
+            progressBar:{
+                height:'4px',
+                background: '#dc4e51;',
+                position:'absolute',
+                width: e + '%'
+            }
+        })
     },
     addSubscriber: function(e){
         e.preventDefault();
@@ -611,27 +664,27 @@ var Subscribe = React.createClass({
             subscriberCompany: this.state.company,
             subscriberEmail: this.state.email
         };
+        //Update the progress bar
+        this.showProgress(50);
         $.ajax({
             url: "/api/add-subscriber",
             type: "POST",
-            dataType: "xml/html/script/json", // expected format for response
             contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
             data: subscriber,
-
+            scope: this,
             complete: function(response) {
-                debugger
-            },
+                this.showProgress(0);
+            }.bind(this),
 
             success: function(response) {
-                debugger
-            },
+                this.showProgress(80);
+            }.bind(this),
 
             error: function(response) {
-                debugger
-            }
+                this.showProgress(80);
+            }.bind(this)
         });
         //Push the properties to db
-        console.log('User to be added:' + this.state.firstName + ' ' + this.state.lastName);
         this.setState({
             firstName: '',
             lastName: '',
@@ -673,6 +726,9 @@ var Subscribe = React.createClass({
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
                     <button className="btn btn-danger register">Subscribe</button>
+                </div>
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <div style={this.state.progressBar}></div>
                 </div>
             </form>
         );

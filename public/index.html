@@ -1,59 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>MaltaJs</title>
-    <!-- Prevent the index.html file from being cached -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <head>
+        <title>MaltaJs</title>
+        <!-- FAVICON -->
+        <link rel="shortcut icon" href="client/favicon.ico" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="client/favicon.ico" />
+        <!-- WEB COMPONENTS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- APP -->
+        <link href="client/css/compiled/shared.concat.css" rel="stylesheet" />
+        <link href="client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- GENERIC PAGE MESSAGES DISPLAY -->
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-    <!-- WEB COMPONENTS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-
-    <!-- APP -->
-    <link href="client/css/compiled/shared.concat.css" rel="stylesheet" />
-
-</head>
-<body>
-<!-- GENERIC PAGE MESSAGES DISPLAY -->
-
-<!-- MAIN PAGE-->
-<div id="main"></div>
+        <!-- MAIN PAGE-->
+        <div id="main"></div>
 
 
-<!--jQuery-->
-<script src="client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js"></script>
-<!-- ReactJS -->
-<script src="client/thirdparty/react-0.13.3/react.js"></script>
-<!-- JSXTransformer -->
-<script src="client/thirdparty/react-0.13.3/JSXTransformer.js"></script>
-<script src="client/thirdparty/react-bootstrap/react-bootstrap.js"></script>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ">
-</script>
-<!-- EXTERNAL RESOURCES -->
+        <!--jQuery-->
+        <script src="client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+        <!-- ReactJS -->
+        <script src="client/thirdparty/react-0.13.3/react.js"></script>
+        <!-- JSXTransformer -->
+        <script src="client/thirdparty/react-0.13.3/JSXTransformer.js"></script>
+        <script src="client/thirdparty/react-bootstrap/react-bootstrap.js"></script>
+        <!--Perfect-scrollbar-->
+        <script src="client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
+        <!-- EXTERNAL RESOURCES -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ">
+        </script>
 
-<!-- MODULES TODO: load on demand -->
-
-
-<!-- APP -->
-<script src="client/appConfig.js"></script>
-<script type="text/jsx" src="client/js/compiled/shared.concat.js"></script>
-
-<!-- PRELOAD THE CONNECTION ICON-->
-<!--<div class="imagePreloader">
-    <img src="Client/images/white/connection_error.svg" />
-</div>-->
-
-</body>
+        <!-- APP -->
+        <script src="client/appConfig.js"></script>
+        <script type="text/jsx" src="client/js/compiled/shared.concat.js"></script>
+    </body>
 </html>

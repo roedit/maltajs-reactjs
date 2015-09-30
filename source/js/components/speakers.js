@@ -51,7 +51,7 @@ var Speakers = React.createClass({
                         company: 'University of Malta',
                         companyUrl: 'http://www.um.edu.mt/',
                         companyLogo: '/client/images/companies/malta_university.jpg',
-                        description: 'Corand\'s personal motto is: the process of achieving goals is as important as the goal achieved. Director of iCreatemotion, Conrad is taking technology at the state of art. He always finds creative ways of how to involve young scientists and professionals while engaging with different sectors in society. In one his publications he\'s proposing p2p network to address the test scenario explosion problem.'
+                        description: 'Founder of iCreatemotion and Assistant Lecturer at the Department of Computer Information Systems within ICT - University of Malta, Conrad obtained his PhD at the Sheffield University, UK. His research interest are smart technology, enterprise applications, mobile applications and persuasive technology. He had contributed actively by increasing resources and opportunities for ICT students. As mentor on several successful projects, Conrad applied his knowledge on mobile technologies for workplace environments. Currently is a consultant for several companies in their initial stages who intend to adopt ERP solutions by providing advice on business processes analysis to optimize the current practices. Previously worked at Malta International Airport designing various solutions and providing support. Contributed to science communication projects such TechLab for SITC and is the vice president of IEEE Malta.'
                     },
                     social: {
                         linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAWE274BxBsLO_Q8LHvgdTum2R-osdpA8YY&authType=NAME_SEARCH&authToken=9Uxs&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A92593086%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443558388444%2Ctas%3Aconr',
@@ -197,5 +197,9 @@ var SpeakerProfile = React.createClass({
                 </div>
             </div>
         );
+    },
+    componentDidMount: function() {
+        var speakerCardBack = this.getDOMNode().childNodes[0].childNodes[1];
+        Ps.initialize(speakerCardBack);
     }
 });
