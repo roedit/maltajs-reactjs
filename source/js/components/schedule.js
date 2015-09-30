@@ -21,36 +21,14 @@ var Schedule = React.createClass({
                 endHour: '10:45',
                 eventType: 'speaker',
                 speaker: {
-                    name: 'Andrei Toma',
-                    img: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
+                    name: 'Cristina Abunei',
+                    img: '/client/images/speakers/cristina_abunei.jpg',
                     topic: 'Predicting SEO growth in a environment of extreme uncertainty',
                     topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
                     references: {
-                        linkedin: 'http://cucurigu2',
-                        tweeter: 'http://cucurigu3',
-                        website: 'http://cucurigu4'
-                    }
-                }
-            },
-            {
-                startHour: '10:45',
-                endHour: '11:00',
-                eventTitle: 'COFFEE BREAK',
-                eventType: 'heading'
-            },
-            {
-                startHour: '11:00',
-                endHour: '11:45',
-                eventType: 'speaker',
-                speaker: {
-                    name: 'Andrei Toma',
-                    img: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
-                    topic: 'Predicting SEO growth in a environment of extreme uncertainty',
-                    topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor.',
-                    references: {
-                        linkedin: 'http://cucurigu2',
-                        tweeter: 'http://cucurigu3',
-                        website: 'http://cucurigu4'
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAALIls4B7ZwO7_az8mIf6a68cRif4p7z__4&authType=NAME_SEARCH&authToken=m9RG&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A46700238%2CauthType%3ANAME_SEARCH%2Cidx%3A1-2-2%2CtarId%3A1443564512634%2Ctas%3Acristina',
+                        tweeter: '',
+                        website: ''
                     }
                 }
             },
@@ -59,21 +37,97 @@ var Schedule = React.createClass({
                 endHour: '11:45',
                 eventType: 'speaker',
                 speaker: {
-                    name: 'Andrei Toma',
-                    img: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
+                    name: 'Conrad Attard',
+                    img: '/client/images/speakers/conrad_attard.jpg',
                     topic: 'Predicting SEO growth in a environment of extreme uncertainty',
                     topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
                     references: {
-                        linkedin: 'http://cucurigu2',
-                        tweeter: 'http://cucurigu3',
-                        website: 'http://cucurigu4'
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAWE274BxBsLO_Q8LHvgdTum2R-osdpA8YY&authType=NAME_SEARCH&authToken=9Uxs&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A92593086%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443558388444%2Ctas%3Aconr',
+                        tweeter: '',
+                        website: 'https://www.um.edu.mt/profile/conradattard'
                     }
                 }
             },
             {
                 startHour: '11:45',
                 endHour: '12:00',
-                eventTitle: 'THANKS & GOOD BYE',
+                eventTitle: 'COFFEE BREAK',
+                eventType: 'heading'
+            },
+            {
+                startHour: '12:00',
+                endHour: '12:45',
+                eventType: 'speaker',
+                speaker: {
+                    name: 'Dr. Mark Micallef',
+                    img: '/client/images/speakers/mark_micallef.jpg',
+                    topic: 'Predicting SEO growth in a environment of extreme uncertainty',
+                    topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor.',
+                    references: {
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAAextoBcVNd3fgJRpU8CFrFIZWFvoyjix4&authType=NAME_SEARCH&authToken=NT7d&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A2016986%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443551264045%2Ctas%3Amicallef',
+                        tweeter: '',
+                        website: 'https://www.um.edu.mt/ict/FacultyArticles/MMI'
+                    }
+                }
+            },
+            {
+                startHour: '13:00',
+                endHour: '13:45',
+                eventType: 'speaker',
+                speaker: {
+                    name: 'Speaker',
+                    img: '/client/images/speakers/search_speaker.jpg',
+                    topic: 'Speaker proposed topic',
+                    topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
+                    references: {
+                        linkedin: '',
+                        tweeter: '',
+                        website: ''
+                    }
+                }
+            },
+            {
+                startHour: '13:45',
+                endHour: '14:00',
+                eventTitle: 'BREAK',
+                eventType: 'heading'
+            },
+            {
+                startHour: '14:00',
+                endHour: '14:45',
+                eventType: 'speaker',
+                speaker: {
+                    name: 'Speaker',
+                    img: '/client/images/speakers/search_speaker.jpg',
+                    topic: 'Speaker proposed topic',
+                    topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor.',
+                    references: {
+                        linkedin: '',
+                        tweeter: '',
+                        website: ''
+                    }
+                }
+            },
+            {
+                startHour: '15:00',
+                endHour: '15:45',
+                eventType: 'speaker',
+                speaker: {
+                    name: 'Daniel Mass, David Bonnuci',
+                    img: '/client/images/speakers/daniel_massa.jpg',
+                    topic: 'Predicting SEO growth in a environment of extreme uncertainty',
+                    topic_description: 'Former senior Google Search Quality team member and now co-founder of the SEO Consulting brand SearchBrothers.com speaks about the one ultimate Google ranking factor. ',
+                    references: {
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAALIls4B7ZwO7_az8mIf6a68cRif4p7z__4&authType=NAME_SEARCH&authToken=m9RG&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A46700238%2CauthType%3ANAME_SEARCH%2Cidx%3A1-2-2%2CtarId%3A1443564512634%2Ctas%3Acristina',
+                        tweeter: '',
+                        website: ''
+                    }
+                }
+            },
+            {
+                startHour: '15:45',
+                endHour: '16:00',
+                eventTitle: 'FEEDBACK & CLOSING OF THE DAY',
                 eventType: 'heading'
             }]
         }
@@ -145,10 +199,9 @@ var ScheduleSpeaker = React.createClass({
                     </h5>
                     <p>
                         "{this.props.data.speaker.topic_description}"
-                        <a className="linkedin" target="_blank" href={this.props.data.speaker.references.linkedin}></a>
-                        <a className="tweeter" target="_blank" href={this.props.data.speaker.references.tweeter}></a>
-                        <a className="website" target="_blank" href={this.props.data.speaker.references.website}></a>
                     </p>
+                    <a className="linkedin" target="_blank" href={this.props.data.speaker.references.linkedin}></a>
+                    <a className="website" target="_blank" href={this.props.data.speaker.references.website}></a>
                 </div>
             </div>
         );

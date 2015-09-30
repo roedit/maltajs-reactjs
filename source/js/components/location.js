@@ -1,11 +1,9 @@
-
 /**
  * Location section
  */
-
  // Google maps api key
  // AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ
-var LocationSection = React.createClass({
+var Location = React.createClass({
 	 getDefaultProps: function () {
 	        return {
 	            initialZoom: 17,
@@ -70,9 +68,7 @@ var LocationSection = React.createClass({
 	    },
 	    render: function () {
 	        return (
-	        	<section id="location" className="row location">Location Section
-	           	 <div className='map-gic' id='map'></div>
-	            </section>
+				<div className='map-gic' id='map'></div>
 	        );
 	    }
 });

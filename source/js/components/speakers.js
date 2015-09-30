@@ -8,7 +8,7 @@ var Speakers = React.createClass({
                 0: {
                     id: 0,
                     name: 'Daniel Massa',
-                    image: '/client/images/speakers/daniel_massa_betsson.jpg',
+                    image: '/client/images/speakers/daniel_massa.jpg',
                     title: 'Frontend Development Lead at Betsson.',
                     job: {
                         position: 'Frontend Development Lead at',

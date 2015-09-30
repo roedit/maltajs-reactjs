@@ -48,7 +48,7 @@
   }
 }
 
-.home{
+.home {
   margin-top: 70px;
   background-image:url('../../images/home_bg_top.jpg');
   background-size: cover;
@@ -57,15 +57,28 @@
   background-repeat: no-repeat;
   background-position: center center;
 
-  h2{
+  h2 {
     text-align: center;
     margin-top:130px;
     font-weight: 700;
     font-size: 55px;
   }
-  h3{
+  h3 {
     text-align: center;
     font-weight: 700;
     font-size: 35px;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 30px;
+
+    .betssonLogo {
+      width: 120px;
+      height: 30px;
+      background: url(../../images/betsson_logo.png);
+      background-repeat: no-repeat;
+      margin-left: 10px;
+    }
   }
 }
