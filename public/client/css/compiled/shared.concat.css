@@ -429,5 +429,46 @@ b {
     .subscribe .register:hover {
       background: #ffffff;
       color: #dc4e51; }
+  .subscribe .progressBar {
+    height: 4px;
+    background: #dc4e51;
+    width: 0;
+    display: none;
+    position: absolute;
+    -webkit-transition: width 1s;
+    -moz-transition: width 1s;
+    -ms-transition: width 1s;
+    transition: width 1s; }
+  .subscribe .progressBar {
+    height: 4px;
+    background: #dc4e51;
+    width: 0;
+    display: none;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -ms-transition: width 0.5s ease;
+    transition: width 0.5s ease; }
+  .subscribe .confirmation {
+    line-height: 40px;
+    margin-top: 20px;
+    width: 100%;
+    display: block;
+    text-align: center; }
+    .subscribe .confirmation .errorMessage {
+      border: 1px solid #dc4e51;
+      color: #dc4e51; }
+    .subscribe .confirmation .successMessage {
+      border: 1px solid #008A00;
+      color: #008A00; }
+  .subscribe .example-appear {
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in; }
+  .subscribe .example-appear.example-appear-active {
+    opacity: 1; }
+  .subscribe .example-leave {
+    opacity: 1; }
+  .subscribe .example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity .5s ease-in; }
 
 /*# sourceMappingURL=subscribe.css.map */

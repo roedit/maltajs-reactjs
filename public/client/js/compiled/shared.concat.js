@@ -179,7 +179,6 @@ var Location = React.createClass({
 	    }
 });
 
-
 /**
  * SCHEDULE LIST- This is the main content for the schedule page
  */
@@ -595,7 +594,6 @@ var SpeakerProfile = React.createClass({
     }
 });
 
-
 /**
  * Header section
  */
@@ -628,33 +626,9 @@ var Subscribe = React.createClass({
             lastName: '',
             company: '',
             email: '',
-            confirm: {
-                display: 'none'
-            },
-            progressBar: {
-                height:'4px',
-                background: '#dc4e51;',
-                width:0,
-                position:'absolute'
-            }
+            progressBar: {},
+            confirm: {}
         }
-    },
-    confirmSubscription(e){
-        this.setState({
-            confirm: {
-                display: 'none'
-            }
-        })
-    },
-    showProgress(e){
-        this.setState({
-            progressBar:{
-                height:'4px',
-                background: '#dc4e51;',
-                position:'absolute',
-                width: e + '%'
-            }
-        })
     },
     addSubscriber: function(e){
         e.preventDefault();
@@ -664,8 +638,7 @@ var Subscribe = React.createClass({
             subscriberCompany: this.state.company,
             subscriberEmail: this.state.email
         };
-        //Update the progress bar
-        this.showProgress(50);
+        //Push the properties to db
         $.ajax({
             url: "/api/add-subscriber",
             type: "POST",
@@ -673,18 +646,35 @@ var Subscribe = React.createClass({
             data: subscriber,
             scope: this,
             complete: function(response) {
-                this.showProgress(0);
+                //set timeout to remove the success message
+                setTimeout(function() {
+                    this.setState({
+                        confirm: {
+                            state: false
+                        }
+                    });
+                }.bind(this), 3500);
             }.bind(this),
 
             success: function(response) {
-                this.showProgress(80);
+                this.setState({
+                    confirm: {
+                        state: true,
+                        class: 'complete'
+                    }
+                });
             }.bind(this),
 
             error: function(response) {
-                this.showProgress(80);
+                this.setState({
+                    confirm: {
+                        state: true,
+                        class: 'error'
+                    }
+                });
             }.bind(this)
         });
-        //Push the properties to db
+        //Reset the form state
         this.setState({
             firstName: '',
             lastName: '',
@@ -728,9 +718,60 @@ var Subscribe = React.createClass({
                     <button className="btn btn-danger register">Subscribe</button>
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                    <div style={this.state.progressBar}></div>
+                    {(() => {
+                        if (this.state.confirm.state === true) {
+                            return (
+                                <Confirm>{this.state.confirm.class}</Confirm>
+                            )
+                        }
+                    })()}
                 </div>
             </form>
+        );
+    }
+});
+
+/**
+ * Confirmation or error message
+ */
+var ReactTransitionGroup = React.addons.CSSTransitionGroup;
+var Confirm = React.createClass({
+    getInitialState: function(){
+        return {confirm: ['randerHtml']}
+    },
+    handleRemove: function() {
+        this.setState({confirm: []});
+    },
+    render: function() {
+        var confirm = this.state.confirm.map(function(item) {
+            if (this.props.children === "complete") {
+                return (
+                    <div className="confirmation" key={item}>
+                        <div className="successMessage ">
+                            You have successfully subscribed for the event!
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="confirmation" key={item}>
+                        <div className="errorMessage">
+                            An error occurred! Please contact us to subscribe for the event!
+                        </div>
+                    </div>
+                );
+            }
+
+        }.bind(this));
+        setTimeout(function() {
+            this.handleRemove();
+        }.bind(this), 3000);
+        return (
+            <div>
+                <ReactTransitionGroup transitionName="example" transitionAppear={true}>
+                    {confirm}
+                </ReactTransitionGroup>
+            </div>
         );
     }
 });
@@ -778,6 +819,4 @@ var Subscriber = React.createClass({
     }
 });
 var mainContainer = document.getElementById('main');
-
-
 React.render(<App/>, mainContainer);
