@@ -50,21 +50,138 @@ var App = React.createClass({
     }
 });
 /**
+ * Countdown timer
+ */
+var Timer = React.createClass({
+    getInitialState: function() {
+        return {
+            display: 'none',
+            eventDate: 'Sat Nov 07 2015 09:00:00 GMT',
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        }
+    },
+    componentWillMount: function() {
+        setInterval(function() {
+            var currentDate = new Date(),
+                eventDate = new Date(this.state.eventDate),
+                secondsToEvent,
+                minutesToEvent,
+                hoursToEvent,
+                daysToEvent,
+                yearsToEvent,
+                dateToEvent;
+
+            currentDate = Date.parse(currentDate);
+            eventDate = Date.parse(eventDate);
+            dateToEvent = (eventDate - currentDate) / 1000;
+            if (dateToEvent > 0) {
+                if (dateToEvent >= (365.25 * 86400)) {
+                    yearsToEvent = Math.floor(dateToEvent / (365.25 * 86400));
+                    dateToEvent = dateToEvent - yearsToEvent * 365.25 * 86400;
+                }
+                if (dateToEvent >= 86400) {
+                    daysToEvent = Math.floor(dateToEvent / 86400);
+                    this.setState({days: daysToEvent});
+                    dateToEvent = dateToEvent - daysToEvent * 86400;
+                }
+                if (dateToEvent >= 3600) {
+                    hoursToEvent = Math.floor(dateToEvent / 3600);
+                    this.setState({hours: hoursToEvent});
+                    dateToEvent = dateToEvent - hoursToEvent * 3600;
+                }
+                if (dateToEvent >= 60) {
+                    minutesToEvent = Math.floor(dateToEvent / 60);
+                    this.setState({minutes: minutesToEvent});
+                    dateToEvent = dateToEvent - minutesToEvent * 60;
+                }
+                //Check if it's working proper -> console.log('Countdown: ' + dateToEvent);
+                secondsToEvent = dateToEvent;
+                if (secondsToEvent > 0 && this.state.display !== 'none'){
+                    this.state.display = "block";
+                }
+                this.setState({seconds: secondsToEvent});
+            }
+        }.bind(this), 1000);
+    },
+    onClick: function(target, e){
+        console.log(target, e);
+
+        $('html, body').animate({
+            scrollTop : $(e.target.hash).position().top
+        }, 800);
+
+        e.preventDefault();
+    },
+    render: function(){
+        return (
+            <div className="row countdown">
+                <div className="timer">
+                    {(() => {
+                        if (this.state.days > 0) {
+                            return (
+                                <p><span className="count">{this.state.days}</span> days and <span className="count">{this.state.hours}</span> hours left of</p>
+                            )
+                        }
+                    })()}
+                    {(() => {
+                        if (this.state.days === 0 && this.state.hours > 0 ) {
+                            return (
+                                <p><span className="count">{this.state.hours}</span> hours and <span className="count">{this.state.minutes}</span> minutes left of</p>
+                            )
+                        }
+                    })()}
+                    {(() => {
+                        if (this.state.days === 0 && this.state.hours === 0 && this.state.display === 'block') {
+                            return (
+                                <p><span className="count">{this.state.minutes}</span> minutes and <span className="count">{this.state.seconds}</span> seconds left of</p>
+                            )
+                        }
+                    })()}
+                </div>
+                <div className="register">
+                    <a href="#subscribe" data-url='subscribe' onClick={this.onClick.bind(null, 'target')} value='Subscribe'>Subscribe</a>
+                </div>
+            </div>
+        );
+    },
+    scrollHandler: function() {
+        var scroll = $(window).scrollTop(),
+            offset = $('.footer').offset().top;
+
+        if (scroll > offset - $(window).height()) {
+            $('.countdown').addClass('sticky');
+        } else {
+            $('.countdown').removeClass('sticky');
+        }
+    },
+    componentDidMount: function() {
+        window.addEventListener("scroll", this.scrollHandler);
+    }
+});
+
+/**
  * Footer section
  */
 var Footer = React.createClass({
     render: function(){
         return (
             <footer className="footer">
-                <div className="leftSide">
-                    <p>Copyright &#9400; MaltaJs 2015 All Rights Reserved</p>
+                <Timer />
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div className="leftSide">
+                        <p>Copyright &#9400; MaltaJs 2015 All Rights Reserved</p>
+                    </div>
+                    <div className="rightSide">
+                        <p>event by:</p>
+                        <a target="_blank" href="http://about.betsson.com/en/company-information/">
+                            <img className="betssonFooter" src="/client/images/betsson_logo.png"></img>
+                        </a>
+                    </div>
                 </div>
-                <div className="rightSide">
-                    <p>event by:</p>
-                    <a target="_blank" href="http://about.betsson.com/en/company-information/">
-                        <img className="betssonFooter" src="/client/images/betsson_logo.png"></img>
-                    </a>
-                </div>
+
             </footer>
         );
     }
