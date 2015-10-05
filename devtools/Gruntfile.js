@@ -9,10 +9,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-browserify');
-    // When preparing the production version uglify an minify
-    // grunt.loadNpmTasks('grunt-contrib-cssmin');
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     //CONFIGURATION
     grunt.initConfig({
@@ -25,6 +25,31 @@ module.exports = function (grunt) {
                     base: '../public',
                     // directory: '../public/',
                     keepalive: true
+                }
+            }
+        },
+        copy: {
+            main: {
+                files: [
+                    // includes files within path and its sub-directories
+                    {
+                        expand: true,
+                        cwd: '../public/',
+                        src: ['**'],
+                        dest: '../production/'}
+                ]
+            },
+            index: {
+                src: '../public/index.html',
+                dest: '../production/index.html',
+                options: {
+                    process: function (content, srcpath) {
+                       var index = content.replace('<!-- JSXTransformer -->', '');
+                        index = index.replace('<script src="client/thirdparty/react-0.13.3/JSXTransformer.js"></script>', '');
+                        index = index.replace('<script type="text/jsx" src="client/js/compiled/shared.concat.jsx"></script>', '<script type="text/javascript" src="client/js/compiled/shared.concat.min.js"></script>');
+                        return index.replace('<link href="client/css/compiled/shared.concat.css" rel="stylesheet" />', '<link href="client/css/compiled/shared.concat.min.css" rel="stylesheet" />');
+
+                    }
                 }
             }
         },
@@ -41,7 +66,7 @@ module.exports = function (grunt) {
                     '../source/js/**/*.js',
                     '../source/js/maltaJsApp.js'
                 ],
-                dest: '../public/client/js/compiled/shared.concat.js'
+                dest: '../public/client/js/compiled/shared.concat.jsx'
             },
             // CSS - create a helper folder - temp-shared
             css_shared: {
@@ -91,15 +116,48 @@ module.exports = function (grunt) {
             },
             sassCacheClean: {
                 src: ['./.sass-cache']
+            },
+            productionClean: {
+                src: ['../production/']
+            },
+            productionJsClean: {
+                src: ['../production/client/js/compiled/']
+            },
+            productionCssClean: {
+                src: ['../production/client/css/compiled/']
             }
         },
-        browserify: {
-            jsScripts: {
-                src: ['../public/client/js/temp-shared/shared.concat.js'],
-                dest: '../public/client/js/compiled/shared.concat.js'
+        //TRANSFORM JSX TO JS
+        babel: {
+            options: {
+                sourceMap: false
+            },
+            dist: {
+                files: {
+                    '../production/client/js/compiled/shared.concat.js': '../public/client/js/compiled/shared.concat.jsx'
+                }
             }
         },
-
+        //MINIMIZE THE CSS
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    '../production/client/css/compiled/shared.concat.min.css': ['../public/client/css/compiled/shared.concat.css']
+                }
+            }
+        },
+        // UGLIFY THE JAVASCRIPT
+        uglify: {
+            my_target: {
+                files: {
+                    '../production/client/js/compiled/shared.concat.min.js': ['../production/client/js/compiled/shared.concat.js']
+                }
+            }
+        },
        // WATCHES
         watch: {
             scriptsAll: {
@@ -141,10 +199,26 @@ module.exports = function (grunt) {
         'clean:sassClean',
         // Clean the temporary sass
         'clean:sassCacheClean'
-        // Browserify the concatenated files
-        //'browserify:jsScripts',
-        // Clean the temporary concat
-        //'clean:tempJsClean'
+    ]);
+
+    // Register the production task
+    grunt.registerTask('production', [ // Default: DEV
+        // Clean the js
+        'clean:productionClean',
+        // Concat the js
+        'copy:main',
+        // Copy and replace the jsx
+        'copy:index',
+        // Clean the js from production
+        'clean:productionJsClean',
+        // Clean the css from production
+        'clean:productionCssClean',
+        // Reactify files to js folder
+        'babel',
+        // Uglify the js
+        'uglify',
+        // Minify the css
+        'cssmin'
     ]);
 
     // Serve presentation locally
