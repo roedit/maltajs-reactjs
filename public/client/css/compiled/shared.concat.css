@@ -16,6 +16,69 @@
 
 /*# sourceMappingURL=bootstrapOverwrite.css.map */
 
+.contact {
+  border-top: 1px solid #f2f2f2;
+  margin-top: 35px;
+  padding-top: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  color: #000000; }
+  .contact h4 {
+    color: #323232;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 25px;
+    text-align: center; }
+  .contact .organizer {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    padding: 10px 25px; }
+    .contact .organizer .name {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: #323232; }
+    .contact .organizer .position {
+      display: block;
+      color: #dc4e51;
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 15px; }
+    .contact .organizer .email {
+      display: inline-block;
+      margin-bottom: 16px; }
+    .contact .organizer .phone {
+      display: inline-block;
+      margin-bottom: 21px; }
+    .contact .organizer .glyphicon {
+      width: 24px; }
+      .contact .organizer .glyphicon:before {
+        display: inline-block;
+        margin-right: 10px; }
+  .contact .contactForm h5 {
+    color: #323232;
+    font-size: 20px;
+    font-weight: 700;
+    float: left;
+    margin-left: 15px; }
+  .contact .contactForm input {
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 5px; }
+  .contact .contactForm textarea {
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 5px;
+    resize: vertical;
+    max-height: 300px;
+    min-height: 50px;
+    overflow: auto; }
+
+/*# sourceMappingURL=contact.css.map */
+
 .countdown {
   position: fixed;
   bottom: 0;
@@ -483,25 +546,6 @@ b {
     .subscribe .register:hover {
       background: #ffffff;
       color: #dc4e51; }
-  .subscribe .progressBar {
-    height: 4px;
-    background: #dc4e51;
-    width: 0;
-    display: none;
-    position: absolute;
-    -webkit-transition: width 1s;
-    -moz-transition: width 1s;
-    -ms-transition: width 1s;
-    transition: width 1s; }
-  .subscribe .progressBar {
-    height: 4px;
-    background: #dc4e51;
-    width: 0;
-    display: none;
-    -webkit-transition: width 0.5s ease;
-    -moz-transition: width 0.5s ease;
-    -ms-transition: width 0.5s ease;
-    transition: width 0.5s ease; }
   .subscribe .confirmation {
     line-height: 40px;
     margin-top: 20px;
@@ -514,14 +558,14 @@ b {
     .subscribe .confirmation .successMessage {
       border: 1px solid #008A00;
       color: #008A00; }
-  .subscribe .example-appear {
+  .subscribe .subscribe-appear {
     opacity: 0.01;
     transition: opacity 0.5s ease-in; }
-  .subscribe .example-appear.example-appear-active {
+  .subscribe .subscribe-appear.subscribe-appear-active {
     opacity: 1; }
-  .subscribe .example-leave {
+  .subscribe .subscribe-leave {
     opacity: 1; }
-  .subscribe .example-leave.example-leave-active {
+  .subscribe .subscribe-leave.subscribe-leave-active {
     opacity: 0.01;
     transition: opacity .5s ease-in; }
 

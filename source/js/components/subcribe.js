@@ -78,37 +78,42 @@ var Subscribe = React.createClass({
     },
     render: function(){
         return (
-            <form onSubmit={this.addSubscriber}>
-                <div className="row">
-                    <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="Name" />
-                    </div>
-                    <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="Surname" />
-                    </div>
-
-                    <div className="clearfix visible-xs-block"></div>
-
-                    <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="Company"/>
-                    </div>
-                    <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
-                    </div>
-                </div>
+            <section id="subscribe" className="row subscribe">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                    <button className="btn btn-danger register">Subscribe</button>
+                    <h4>Subscribe</h4>
                 </div>
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                    {(() => {
-                        if (this.state.confirm.state === true) {
-                            return (
-                                <Confirm>{this.state.confirm.class}</Confirm>
-                            )
-                        }
-                    })()}
-                </div>
-            </form>
+                <form onSubmit={this.addSubscriber}>
+                    <div className="row">
+                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <input type="text" value={this.state.firstName} onChange={this.onChangeFirstName} placeholder="Name" />
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <input type="text" value={this.state.lastName} onChange={this.onChangeLastName} placeholder="Surname" />
+                        </div>
+
+                        <div className="clearfix visible-xs-block"></div>
+
+                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <input type="text" value={this.state.company} onChange={this.onChangeCompany} placeholder="Company"/>
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                        <button className="btn btn-danger register">Subscribe</button>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                        {(() => {
+                            if (this.state.confirm.state === true) {
+                                return (
+                                    <Confirm>{this.state.confirm.class}</Confirm>
+                                )
+                            }
+                        })()}
+                    </div>
+                </form>
+            </section>
         );
     }
 });
@@ -150,7 +155,7 @@ var Confirm = React.createClass({
         }.bind(this), 3000);
         return (
             <div>
-                <ReactTransitionGroup transitionName="example" transitionAppear={true}>
+                <ReactTransitionGroup transitionName="subscribe" transitionAppear={true}>
                     {confirm}
                 </ReactTransitionGroup>
             </div>

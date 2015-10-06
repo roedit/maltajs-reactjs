@@ -16,27 +16,21 @@ var App = React.createClass({
                             <img className="betssonHeader" src="/client/images/betsson_logo.png"></img>
                         </a>
                     </p>
+                </section>
 
-                </section>
-                <section id="subscribe" className="row subscribe">
-                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <h4>Subscribe</h4>
-                    </div>
-                    <Subscribe />
-                </section>
+                <Subscribe />
+
         		<section id="schedule" className="row schedule">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
                         <h4>Schedule</h4>
                     </div>
                     <Schedule />
                 </section>
-				<section id="speakers" className="row speakers">
-					<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-						<h4>Speakers</h4>
-					</div>
-					<Speakers />
-				</section>
-        	    <SponsorsSection />
+
+                <Speakers />
+        	    <Sponsors />
+                <Contact />
+
                 <section id="location" className="row location">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
                         <h4>Location</h4>

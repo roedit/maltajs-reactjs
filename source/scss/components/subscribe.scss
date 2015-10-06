@@ -42,28 +42,6 @@
     }
   }
 
-  .progressBar {
-    height: 4px;
-    background: #dc4e51;
-    width: 0;
-    display: none;
-    position: absolute;
-    -webkit-transition: width 1s;
-    -moz-transition: width 1s;
-    -ms-transition: width 1s;
-    transition: width 1s;
-  }
-
-  .progressBar {
-    height: 4px;
-    background: #dc4e51;
-    width: 0;
-    display: none;
-    -webkit-transition: width 0.5s ease;
-    -moz-transition: width 0.5s ease;
-    -ms-transition: width 0.5s ease;
-    transition: width 0.5s ease;
-  }
   .confirmation {
     line-height: 40px;
     margin-top: 20px;
@@ -82,27 +60,21 @@
     }
   }
 
-
-
-  .example-appear {
+  .subscribe-appear {
     opacity: 0.01;
     transition: opacity 0.5s ease-in;
   }
 
-  .example-appear.example-appear-active {
+  .subscribe-appear.subscribe-appear-active {
     opacity: 1;
   }
 
-  .example-leave {
+  .subscribe-leave {
     opacity: 1;
   }
 
-  .example-leave.example-leave-active {
+  .subscribe-leave.subscribe-leave-active {
     opacity: 0.01;
     transition: opacity .5s ease-in;
   }
-}
-
-@media only screen and (max-width: 480px) {
-
 }

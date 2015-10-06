@@ -2,6 +2,18 @@
  * SPEAKERS LIST- This is the main content for the schedule page
  */
 var Speakers = React.createClass({
+    render: function(){
+        return (
+            <section id="speakers" className="row speakers">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <h4>Speakers</h4>
+                </div>
+                <SpeakersList />
+            </section>
+        );
+    }
+});
+var SpeakersList = React.createClass({
     getInitialState: function(){
         return {
             data: [{
