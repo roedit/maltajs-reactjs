@@ -212,6 +212,6 @@ var SpeakerProfile = React.createClass({
     },
     componentDidMount: function() {
         var speakerCardBack = this.getDOMNode().childNodes[0].childNodes[1];
-        Ps.initialize(speakerCardBack);
+        /*Ps.initialize(speakerCardBack);*/
     }
 });

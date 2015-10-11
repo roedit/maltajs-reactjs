@@ -3,16 +3,15 @@ module.exports = function (grunt) {
     'use strict';
 
     // Load libraries (DEPENDENCIES)
-    // grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks("grunt-browserify");
 
     //CONFIGURATION
     grunt.initConfig({
@@ -44,11 +43,8 @@ module.exports = function (grunt) {
                 dest: '../production/index.html',
                 options: {
                     process: function (content, srcpath) {
-                       var index = content.replace('<!-- JSXTransformer -->', '');
-                        index = index.replace('<script src="client/thirdparty/react-0.13.3/JSXTransformer.js"></script>', '');
-                        index = index.replace('<script type="text/jsx" src="client/js/compiled/shared.concat.jsx"></script>', '<script type="text/javascript" src="client/js/compiled/shared.concat.min.js"></script>');
+                       var index = content.replace('require([\'app\']);', 'require([\'appProduction\']);');
                         return index.replace('<link href="client/css/compiled/shared.concat.css" rel="stylesheet" />', '<link href="client/css/compiled/shared.concat.min.css" rel="stylesheet" />');
-
                     }
                 }
             }
@@ -56,17 +52,13 @@ module.exports = function (grunt) {
         //Concat files
         concat: {
             // JAVASCRIPT
-            //SHARED
             shared_js: {
-                options: {
-                    // the banner is inserted at the top of the output
-                    banner: '/** @jsx react.dom */\n'
-                },
                 src: [
+                    '../public/client/appConfig.js',
                     '../source/js/**/*.js',
                     '../source/js/maltaJsApp.js'
                 ],
-                dest: '../public/client/js/compiled/shared.concat.jsx'
+                dest: '../public/client/js/concat/shared.concat.js'
             },
             // CSS - create a helper folder - temp-shared
             css_shared: {
@@ -103,10 +95,7 @@ module.exports = function (grunt) {
         clean: {
             options: {'force': true},
             jsClean: {
-                src: ['../public/client/js/compiled']
-            },
-            tempJsClean: {
-                src: ['../public/client/js/temp-shared']
+                src: ['../public/client/js/compiled', '../public/client/js/concat']
             },
             cssClean: {
                 src: ['../public/client/css/compiled']
@@ -128,13 +117,27 @@ module.exports = function (grunt) {
             }
         },
         //TRANSFORM JSX TO JS
-        babel: {
-            options: {
-                sourceMap: false
-            },
-            dist: {
+        browserify: {
+            public: {
+                options: {
+                    transform: [
+                        ['babelify', {
+                            loose: 'all',
+                            "compact": false
+                        }]
+                    ],
+                    alias: [
+                        '../public/client/thirdparty/react-0.13.3/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js:jquery',
+                        '../public/client/thirdparty/react-bootstrap/react-bootstrap.min.js:bootstrap',
+                        '../public/client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js:scrollbar'
+                    ]/*,
+                    browserifyOptions: {
+                        debug: true
+                    }*/
+                },
                 files: {
-                    '../production/client/js/compiled/shared.concat.js': '../public/client/js/compiled/shared.concat.jsx'
+                    '../public/client/js/compiled/shared.concat.js': ['../public/client/js/concat/shared.concat.js']
                 }
             }
         },
@@ -184,11 +187,19 @@ module.exports = function (grunt) {
     });
 
     // Register the default tasks
-    grunt.registerTask('default', [ // Default: DEV
+    grunt.registerTask('default', [
+    /**
+     * Js Tasks
+     */
         // Clean the js
         'clean:jsClean',
         // Concat the js
         'concat:shared_js',
+        // Babel files to compiled folder
+        'browserify',
+    /**
+     * Css tasks
+     */
         // Clean the scs
         'clean:cssClean',
         // Generate the scc
@@ -202,7 +213,7 @@ module.exports = function (grunt) {
     ]);
 
     // Register the production task
-    grunt.registerTask('production', [ // Default: DEV
+    grunt.registerTask('production', [
         // Clean the js
         'clean:productionClean',
         // Concat the js
