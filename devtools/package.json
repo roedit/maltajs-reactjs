@@ -24,6 +24,8 @@
     "nodemon": "1.4.1"
   },
   "dependencies": {
-    "grunt-contrib-connect": "^0.7.1"
+    "grunt-contrib-connect": "^0.7.1",
+    "nodemailer": "^1.8.0",
+    "nodemailer-sendgrid-transport": "^0.2.0"
   }
 }

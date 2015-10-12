@@ -1,6 +1,7 @@
 module.exports= function(app) {
     var model     = require('../models/schema');
-
+    var nodemailer = require('nodemailer');
+    var sgTransport = require('nodemailer-sendgrid-transport');
     /**
      * Get subscribers list
      * http://localhost:3000/api/subscribers
@@ -34,6 +35,37 @@ module.exports= function(app) {
             }
 
             res.send(subscriber);
+        });
+    });
+
+    app.post('/api/contact', function(req, res) {
+        console.log(req.body);
+
+        var options = {
+          auth: {
+            api_user: 'maltajs',
+            api_key: 'maltajs2015'
+          }
+        }
+
+        var client = nodemailer.createTransport(sgTransport(options));
+
+        var email = {
+          from: 'contact@maltajs.com',
+          to: 'boggdan.dumitriu@gmail.com',
+          subject: 'MaltaJs Conference 2015',
+          text: '',
+          html: '<b>This a message from - '+ req.body.name + '<br>' + req.body.message + '</b>'
+        };
+
+        client.sendMail(email, function(err, info){
+            if (err ){
+              console.log(error);
+            }
+            else {
+              console.log('Message sent: ' + info.message);
+              res.send('Email sent succesfully');
+            }
         });
     });
 };

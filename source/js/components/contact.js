@@ -82,24 +82,24 @@ var FormSection = React.createClass({
         return (
             <div className="col-xs-12 col-sm-12 col-md-5 col-md-offset-1 col-lg-5 col-md-offset-1 contactForm">
                 <h5>Send us a message</h5>
-                <form>
+                <form action='/api/contact' name='contact' id='contact' method='post'>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input type="text" value={this.state.name} onChange={this.onChangeName} placeholder="Name" />
+                        <input type="text" name="name" id="name" value={this.state.name} onChange={this.onChangeName} placeholder="Name" />
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input type="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
+                        <input type="email" name="email" id="email" value={this.state.email} onChange={this.onChangeEmail} placeholder="Email" />
                     </div>
 
                     <div className="clearfix visible-xs-block"></div>
 
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input type="text" value={this.state.phone} onChange={this.onChangePhone} placeholder="Phone"/>
+                        <input type="text" name="phone" id="phone" value={this.state.phone} onChange={this.onChangePhone} placeholder="Phone"/>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <textarea value={this.state.message} onChange={this.onChangeMessage} placeholder="Message"></textarea>
+                        <textarea name="message" id="message" value={this.state.message} onChange={this.onChangeMessage} placeholder="Message"></textarea>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <button className="btn btn-danger register">SEND</button>
+                        <button type="submit" name="submit" id="submit" className="btn btn-danger register">SEND</button>
                     </div>
                 </form>
             </div>
