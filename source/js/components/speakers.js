@@ -1,5 +1,5 @@
 /**
- * SPEAKERS LIST- This is the main content for the schedule page
+ * SPEAKERS LIST- This is the main content for the speakers page
  */
 var Speakers = React.createClass({
     render: function(){
@@ -13,6 +13,7 @@ var Speakers = React.createClass({
         );
     }
 });
+
 var SpeakersList = React.createClass({
     getInitialState: function(){
         return {
