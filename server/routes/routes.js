@@ -52,7 +52,7 @@ module.exports= function(app) {
 
         var email = {
           from: 'contact@maltajs.com',
-          to: 'boggdan.dumitriu@gmail.com',
+          to: 'tzuuc@yahoo.com',
           subject: 'MaltaJs Conference 2015',
           text: '',
           html: '<b>This a message from - '+ req.body.name + '<br>' + req.body.message + '</b>'
