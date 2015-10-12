@@ -41,8 +41,40 @@
       color: #dc4e51;
     }
   }
-}
 
-@media only screen and (max-width: 480px) {
+  .confirmation {
+    line-height: 40px;
+    margin-top: 20px;
+    width: 100%;
+    display: block;
+    text-align: center;
 
+    .errorMessage {
+      border: 1px solid #dc4e51;
+      color: #dc4e51;
+    }
+
+    .successMessage {
+      border: 1px solid #008A00;
+      color: #008A00;
+    }
+  }
+
+  .subscribe-appear {
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in;
+  }
+
+  .subscribe-appear.subscribe-appear-active {
+    opacity: 1;
+  }
+
+  .subscribe-leave {
+    opacity: 1;
+  }
+
+  .subscribe-leave.subscribe-leave-active {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+  }
 }

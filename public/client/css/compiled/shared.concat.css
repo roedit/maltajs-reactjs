@@ -16,6 +16,145 @@
 
 /*# sourceMappingURL=bootstrapOverwrite.css.map */
 
+.contact {
+  border-top: 1px solid #f2f2f2;
+  margin-top: 35px;
+  padding-top: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  color: #000000; }
+  .contact h4 {
+    color: #323232;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 25px;
+    text-align: center; }
+  .contact .organizer {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 10px 25px; }
+    .contact .organizer .name {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: #323232; }
+    .contact .organizer .position {
+      display: block;
+      color: #dc4e51;
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 15px; }
+    .contact .organizer .email {
+      display: inline-block;
+      margin-bottom: 16px; }
+    .contact .organizer .phone {
+      display: inline-block;
+      margin-bottom: 21px; }
+    .contact .organizer .glyphicon {
+      width: 24px; }
+      .contact .organizer .glyphicon:before {
+        display: inline-block;
+        margin-right: 10px; }
+  .contact .contactForm h5 {
+    color: #323232;
+    font-size: 20px;
+    font-weight: 700;
+    float: left;
+    margin-left: 15px; }
+  .contact .contactForm input {
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 5px; }
+  .contact .contactForm textarea {
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 5px;
+    resize: vertical;
+    max-height: 300px;
+    min-height: 50px;
+    overflow: auto; }
+
+/*# sourceMappingURL=contact.css.map */
+
+.countdown {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99; }
+  .countdown.sticky {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    height: 40px; }
+  .countdown .timer {
+    background: #dc4e51;
+    padding: 0 12px;
+    height: 40px;
+    float: left; }
+    .countdown .timer p {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 300;
+      line-height: 40px;
+      margin: 0; }
+      .countdown .timer p .count {
+        font-weight: 600;
+        font-size: 18px; }
+  .countdown .register {
+    display: block;
+    height: 40px;
+    background: #323232;
+    border: 1px solid #323232;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    float: right;
+    padding: 0 12px; }
+    .countdown .register a {
+      font-size: 16px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 40px;
+      text-decoration: none;
+      margin: 0; }
+    .countdown .register:hover {
+      border: 1px solid #dc4e51;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out 0s;
+      -moz-transition: all 0.2s ease-in-out 0s;
+      -webkit-transition: all 0.2s ease-in-out 0s; }
+      .countdown .register:hover a {
+        color: #dc4e51; }
+
+/*# sourceMappingURL=countdown.css.map */
+
+.footer {
+  width: 100%;
+  height: 100px;
+  background-color: #f0f0f0;
+  padding-top: 25px;
+  position: relative; }
+  .footer .leftSide {
+    float: left;
+    margin-left: 10px;
+    padding-top: 20px; }
+    .footer .leftSide p {
+      color: #b5b5b5;
+      font-size: 10px; }
+  .footer .rightSide {
+    float: right;
+    margin-right: 20px;
+    text-align: left;
+    display: inline-block; }
+    .footer .rightSide p {
+      color: #777777;
+      font-size: 10px; }
+
+/*# sourceMappingURL=footer.css.map */
+
 .header-row {
   position: fixed;
   width: 100%;
@@ -57,7 +196,7 @@
   margin-top: 70px;
   background-image: url("../../images/home_bg_top.jpg");
   background-size: cover;
-  height: 450px;
+  min-height: 350px;
   color: #FFF;
   background-repeat: no-repeat;
   background-position: center center; }
@@ -65,18 +204,31 @@
     text-align: center;
     margin-top: 130px;
     font-weight: 700;
-    font-size: 55px; }
+    font-size: 55px;
+    padding-top: 50px; }
   .home h3 {
     text-align: center;
     font-weight: 700;
     font-size: 35px; }
+  .home p {
+    text-align: center;
+    margin-top: 30px; }
+    .home p .betssonHeader {
+      width: 120px;
+      height: 30px;
+      margin-left: 10px;
+      margin-top: -7px; }
 
 /*# sourceMappingURL=header.css.map */
 
 .location {
   background-color: #FFF;
-  height: 600px;
   margin-bottom: 100px; }
+  .location h4 {
+    color: #323232;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 45px; }
   .location .map-gic {
     width: 100%;
     height: 550px; }
@@ -119,26 +271,18 @@ b {
 
 .linkedin {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
+  width: 19px;
+  height: 19px;
+  background: url(../../images/media.png) -2px 0px;
   margin-bottom: 10px;
   margin-top: 10px;
   margin-right: 5px; }
 
-.twitter {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
-  margin-bottom: 10px;
-  margin-top: 10px; }
-
 .website {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../../images/social_media.png) 0 0;
+  width: 19px;
+  height: 19px;
+  background: url(../../images/media.png) -2px -21px;
   margin-bottom: 10px;
   margin-top: 10px; }
 
@@ -325,7 +469,7 @@ b {
 
 .sponsors {
   background-color: #f0f0f0;
-  height: 550px; }
+  min-height: 550px; }
   .sponsors .sponsor_button {
     text-align: center;
     color: #fff;
@@ -401,5 +545,27 @@ b {
     .subscribe .register:hover {
       background: #ffffff;
       color: #dc4e51; }
+  .subscribe .confirmation {
+    line-height: 40px;
+    margin-top: 20px;
+    width: 100%;
+    display: block;
+    text-align: center; }
+    .subscribe .confirmation .errorMessage {
+      border: 1px solid #dc4e51;
+      color: #dc4e51; }
+    .subscribe .confirmation .successMessage {
+      border: 1px solid #008A00;
+      color: #008A00; }
+  .subscribe .subscribe-appear {
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in; }
+  .subscribe .subscribe-appear.subscribe-appear-active {
+    opacity: 1; }
+  .subscribe .subscribe-leave {
+    opacity: 1; }
+  .subscribe .subscribe-leave.subscribe-leave-active {
+    opacity: 0.01;
+    transition: opacity .5s ease-in; }
 
 /*# sourceMappingURL=subscribe.css.map */

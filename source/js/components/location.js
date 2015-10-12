@@ -1,11 +1,9 @@
-
 /**
  * Location section
  */
-
  // Google maps api key
  // AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ
-var LocationSection = React.createClass({
+var Location = React.createClass({
 	 getDefaultProps: function () {
 	        return {
 	            initialZoom: 17,
@@ -17,11 +15,11 @@ var LocationSection = React.createClass({
 	    	var image = {
 	    		url: 'client/images/map_marker.png',
 			    // This marker is 20 pixels wide by 32 pixels high.
-			    size: new google.maps.Size(30, 30),
+			    size: new google.maps.Size(70, 70),
 			    // The origin for this image is (0, 0).
 			    origin: new google.maps.Point(0, 0),
 			    // The anchor for this image is the base of the flagpole at (0, 32).
-			    anchor: new google.maps.Point(0, 32)
+			    anchor: new google.maps.Point(12, 70)
 	    	};
 
 	    	var contentString = '<div id="content">'+
@@ -70,9 +68,7 @@ var LocationSection = React.createClass({
 	    },
 	    render: function () {
 	        return (
-	        	<section id="location" className="row location">Location Section
-	           	 <div className='map-gic' id='map'></div>
-	            </section>
+				<div className='map-gic' id='map'></div>
 	        );
 	    }
 });

@@ -10,8 +10,7 @@ module.exports= function(app) {
 
         query.exec(function(err,subscribers){
             console.log(subscribers);
-            //res.json({text: 'Entire subscribers list'}, subscribers);
-            res.send('Hello Man');
+            res.send(subscribers);
         });
     });
 
@@ -31,10 +30,10 @@ module.exports= function(app) {
             if (err) {
                 // if an error occurs, show it in console
                 console.log(err);
-                return res.json(err);
+                return err;
             }
-            res.json({ message: 'Subscriber successfully added', subscriber: subscriber });
-            res.end();
+
+            res.send(subscriber);
         });
     });
 };

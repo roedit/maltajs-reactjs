@@ -2,13 +2,25 @@
  * SPEAKERS LIST- This is the main content for the schedule page
  */
 var Speakers = React.createClass({
+    render: function(){
+        return (
+            <section id="speakers" className="row speakers">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <h4>Speakers</h4>
+                </div>
+                <SpeakersList />
+            </section>
+        );
+    }
+});
+var SpeakersList = React.createClass({
     getInitialState: function(){
         return {
             data: [{
                 0: {
                     id: 0,
                     name: 'Daniel Massa',
-                    image: '/client/images/speakers/daniel_massa_betsson.jpg',
+                    image: '/client/images/speakers/daniel_massa.jpg',
                     title: 'Frontend Development Lead at Betsson.',
                     job: {
                         position: 'Frontend Development Lead at',
@@ -25,59 +37,55 @@ var Speakers = React.createClass({
                 },
                 1: {
                     id: 1,
-                    name: 'Andrei Toma',
-                    image: 'http://selectyachts-spain.com/wp-content/uploads/2013/10/picAndreiToma-300x300.jpg',
-                    title: 'Partner and Lawyer at Schonherr.',
+                    name: 'Dr. Mark Micallef',
+                    image: '/client/images/speakers/mark_micallef.jpg',
+                    title: 'Ph.D University of Malta, Macmillan.',
                     job: {
-                        position: 'Organic Performance Client Development Lead at',
-                        company: 'Forward3D',
-                        companyUrl: 'http://youtube.com',
-                        companyLogo: 'https://ulrikbengtsson.files.wordpress.com/2013/08/screen-shot-2013-08-20-at-19-24-50.png',
-                        url: 'http://google.com',
-                        logo: 'http://image.com',
-                        description: 'Works at Forward3D, Europe\'s largest independent digital agency.'
+                        position: 'Test Strategy Consultant at',
+                        company: 'Macmillan',
+                        companyUrl: 'http://www.macmillan.com/',
+                        companyLogo: '/client/images/companies/macmillan.jpg',
+                        description: 'Specialist in Automated testing, QA Team ramp-up, QA Processes and integration of measurement into processes, Dr Mark Micallef had many teaching position throughout the years. Combining highly technical solutions with creative ideas, Mark is the author of more than 18 publications and he is regularly speaking in several important web related events all over Europe. He has helped top companies from England and Malta. Some of the brands he has worked with are BBC News , BOV, Betclic, CCBill.'
                     },
                     social: {
-                        linkedin: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974',
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAAextoBcVNd3fgJRpU8CFrFIZWFvoyjix4&authType=NAME_SEARCH&authToken=NT7d&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A2016986%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443551264045%2Ctas%3Amicallef',
                         tweeter: '',
-                        website: ''
+                        website: 'https://www.um.edu.mt/ict/FacultyArticles/MMI'
                     }
                 },
                 2: {
                     id: 2,
-                    name: 'Bogdan Dumitriu',
-                    image: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/046/2ad/36bfc2e.jpg',
-                    title: 'Partner and Lawyer at Schonherr.',
+                    name: 'Conrad Attard',
+                    image: '/client/images/speakers/conrad_attard.jpg',
+                    title: 'Assistant Lecturer at University of Malta.',
                     job: {
-                        position: 'Organic Performance Client Development Lead at',
-                        company: 'Forward3D',
-                        companyUrl: 'http://www.youtube.com',
-                        companyLogo: 'https://ulrikbengtsson.files.wordpress.com/2013/08/screen-shot-2013-08-20-at-19-24-50.png',
-                        url: 'http://www.google.com',
-                        logo: 'http://www.image.com',
-                        description: 'Marketing consultant experienced in developing technical SEO & user engagement strategies for enterprise websites. Industry experience in ecommerce, travel aggregators, online market places, luxury retail, and finance. Before this, I created events and marketing communications for companies such as Hewlett Packard and Skanska..'
+                        position: 'Assistant Lecturer at ',
+                        company: 'University of Malta',
+                        companyUrl: 'http://www.um.edu.mt/',
+                        companyLogo: '/client/images/companies/malta_university.jpg',
+                        description: 'Founder of iCreatemotion and Assistant Lecturer at the Department of Computer Information Systems within ICT - University of Malta, Conrad obtained his PhD at the Sheffield University, UK. His research interest are smart technology, enterprise applications, mobile applications and persuasive technology. He had contributed actively by increasing resources and opportunities for ICT students. As mentor on several successful projects, Conrad applied his knowledge on mobile technologies for workplace environments. Currently is a consultant for several companies in their initial stages who intend to adopt ERP solutions by providing advice on business processes analysis to optimize the current practices. Previously worked at Malta International Airport designing various solutions and providing support. Contributed to science communication projects such TechLab for SITC and is the vice president of IEEE Malta.'
                     },
                     social: {
-                        linkedin: '',
-                        tweeter: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974',
-                        website: 'https://ro.linkedin.com/pub/andrei-toma/17/300/974'
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAAWE274BxBsLO_Q8LHvgdTum2R-osdpA8YY&authType=NAME_SEARCH&authToken=9Uxs&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A92593086%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1443558388444%2Ctas%3Aconr',
+                        tweeter: '',
+                        website: 'https://www.um.edu.mt/profile/conradattard'
                     }
                 }
             },{
                 0: {
                     id: 4,
-                    name: 'Call for Speakers',
-                    image: '/client/images/speakers/search_speaker.jpg',
-                    title: 'Do you want to participate as speaker at the conference?',
+                    name: 'Cristina Abunei',
+                    image: '/client/images/speakers/cristina_abunei.jpg',
+                    title: 'Software Support Engineer III at Continental Automotive',
                     job: {
-                        position: 'Contact: andrei.toma()betssongroup.com',
-                        company: '',
-                        companyUrl: '',
-                        companyLogo: '',
-                        description: 'Maltajs invites you to participate as a speaker at our next conference on November 07, 2015 @ Betsson Experience Centre. Please give us some details about yourself and the topic you would like to present. Regarding your presentation, it should be 45 minutes long, on any IT development topic you have experience with. For example, javascript, testing, business analysis, project management.'
+                        position: 'Software Support Engineer III',
+                        company: 'Continental Automotive',
+                        companyUrl: 'http://www.continental-automotive.com/www/automotive_de_en/',
+                        companyLogo: '/client/images/companies/continental.jpg',
+                        description: 'Cristina Abunei is part of the Processes and Tools team from the Infotainment Interior and Connectivity business unit. As an expert in configuration and change management she has the ability to offer high level of support for colleagues, customers and suppliers, but also ensures that applications are meeting the goals of the organisation. As a leader of different internal projects she fosters involvement, learning and collaboration among team members and supports a self-organized team by facilitating an agile environment.'
                     },
                     social: {
-                        linkedin: '',
+                        linkedin: 'https://www.linkedin.com/profile/view?id=AAkAAALIls4B7ZwO7_az8mIf6a68cRif4p7z__4&authType=NAME_SEARCH&authToken=m9RG&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A46700238%2CauthType%3ANAME_SEARCH%2Cidx%3A1-2-2%2CtarId%3A1443564512634%2Ctas%3Acristina',
                         tweeter: '',
                         website: ''
                     }
@@ -177,7 +185,7 @@ var SpeakerProfile = React.createClass({
                         {(() => {
                             if (this.props.data.social.website !== '') {
                                 return (
-                                    <a className="linkedin" target="_blank" href={this.props.data.social.website}></a>
+                                    <a className="website" target="_blank" href={this.props.data.social.website}></a>
                                 )
                             }
                         })()}
@@ -201,5 +209,9 @@ var SpeakerProfile = React.createClass({
                 </div>
             </div>
         );
+    },
+    componentDidMount: function() {
+        var speakerCardBack = this.getDOMNode().childNodes[0].childNodes[1];
+        /*Ps.initialize(speakerCardBack);*/
     }
 });
