@@ -1,7 +1,25 @@
 /**
- * SCHEDULE LIST- This is the main content for the schedule page
+ * SCHEDULE- This is the main content for the schedule page
  */
 var Schedule = React.createClass({
+    render: function(){
+        return (
+            <section id="schedule" className="row schedule">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <h4>Schedule</h4>
+                </div>
+                <ScheduleList/>
+            </section>
+        );
+    }
+});
+
+
+
+/**
+ * SCHEDULE LIST- This is the main content for the schedule page
+ */
+var ScheduleList = React.createClass({
     getInitialState: function(){
         return {
             data: [{

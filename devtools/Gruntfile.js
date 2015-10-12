@@ -12,10 +12,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks("grunt-browserify");
+    grunt.loadNpmTasks("grunt-babel");
 
     //CONFIGURATION
     grunt.initConfig({
-        //Connect server
+        //CONNECT SERVER
         connect: {
             server: {
                 options: {
@@ -27,29 +28,29 @@ module.exports = function (grunt) {
                 }
             }
         },
+        //COPY FILES
         copy: {
-            main: {
+            production: {
                 files: [
-                    // includes files within path and its sub-directories
                     {
                         expand: true,
-                        cwd: '../public/',
-                        src: ['**'],
-                        dest: '../production/'}
+                        cwd: '../public/client',
+                        src: ['favicon.ico', 'images/**/*'],
+                        dest: '../production/client'}
                 ]
             },
             index: {
                 src: '../public/index.html',
                 dest: '../production/index.html',
                 options: {
-                    process: function (content, srcpath) {
-                       var index = content.replace('require([\'app\']);', 'require([\'appProduction\']);');
-                        return index.replace('<link href="client/css/compiled/shared.concat.css" rel="stylesheet" />', '<link href="client/css/compiled/shared.concat.min.css" rel="stylesheet" />');
+                    process: function (content) {
+                       var index = content.replace('shared.concat.css', 'shared.concat.min.css');
+                        return index.replace('shared.concat.js', 'shared.concat.min.js');
                     }
                 }
             }
         },
-        //Concat files
+        //CONCAT FILES
         concat: {
             // JAVASCRIPT
             shared_js: {
@@ -110,13 +111,10 @@ module.exports = function (grunt) {
                 src: ['../production/']
             },
             productionJsClean: {
-                src: ['../production/client/js/compiled/']
-            },
-            productionCssClean: {
-                src: ['../production/client/css/compiled/']
+                src: ['../production/client/js/concat']
             }
         },
-        //TRANSFORM JSX TO JS
+        //ADD DEPENDENCIES AND TRANSFORM JSX TO JS
         browserify: {
             public: {
                 options: {
@@ -131,13 +129,37 @@ module.exports = function (grunt) {
                         '../public/client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js:jquery',
                         '../public/client/thirdparty/react-bootstrap/react-bootstrap.min.js:bootstrap',
                         '../public/client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js:scrollbar'
-                    ]/*,
+                    ],
                     browserifyOptions: {
                         debug: true
-                    }*/
+                    }
                 },
                 files: {
                     '../public/client/js/compiled/shared.concat.js': ['../public/client/js/concat/shared.concat.js']
+                }
+            },
+            production: {
+                options: {
+                    alias: [
+                        '../public/client/thirdparty/react-0.13.3/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js:jquery',
+                        '../public/client/thirdparty/react-bootstrap/react-bootstrap.min.js:bootstrap',
+                        '../public/client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js:scrollbar'
+                    ]
+                },
+                files: {
+                    '../production/client/js/compiled/shared.concat.min.js': ['../production/client/js/concat/shared.concat.min.js']
+                }
+            }
+        },
+        // TRANSFORM THE JSX TO JS
+        babel: {
+            production: {
+                options: {
+                    sourceMap: false
+                },
+                files: {
+                    '../production/client/js/concat/shared.concat.js': '../public/client/js/concat/shared.concat.js'
                 }
             }
         },
@@ -157,7 +179,7 @@ module.exports = function (grunt) {
         uglify: {
             my_target: {
                 files: {
-                    '../production/client/js/compiled/shared.concat.min.js': ['../production/client/js/compiled/shared.concat.js']
+                    '../production/client/js/concat/shared.concat.min.js': ['../production/client/js/concat/shared.concat.js']
                 }
             }
         },
@@ -188,18 +210,14 @@ module.exports = function (grunt) {
 
     // Register the default tasks
     grunt.registerTask('default', [
-    /**
-     * Js Tasks
-     */
+    /**Js Tasks**/
         // Clean the js
         'clean:jsClean',
         // Concat the js
         'concat:shared_js',
         // Babel files to compiled folder
-        'browserify',
-    /**
-     * Css tasks
-     */
+        'browserify:public',
+    /**Css tasks**/
         // Clean the scs
         'clean:cssClean',
         // Generate the scc
@@ -214,20 +232,18 @@ module.exports = function (grunt) {
 
     // Register the production task
     grunt.registerTask('production', [
-        // Clean the js
+        // Clean the production folder
         'clean:productionClean',
-        // Concat the js
-        'copy:main',
-        // Copy and replace the jsx
-        'copy:index',
-        // Clean the js from production
-        'clean:productionJsClean',
-        // Clean the css from production
-        'clean:productionCssClean',
-        // Reactify files to js folder
-        'babel',
+        // Copy the public folder to production
+        'copy:production', 'copy:index',
+        // Transform JSX to JS
+        'babel:production',
         // Uglify the js
         'uglify',
+        // Babel files to compiled folder
+        'browserify:production',
+        // Clean the JS from production
+        'clean:productionJsClean',
         // Minify the css
         'cssmin'
     ]);
