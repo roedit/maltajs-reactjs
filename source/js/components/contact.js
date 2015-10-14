@@ -2,6 +2,7 @@
  * Contact page- This is the main content for the contact page
  */
 var Contact = React.createClass({
+   
     render: function(){
         return (
             <section id="contact" className="row contact">
@@ -78,11 +79,36 @@ var FormSection = React.createClass({
     onChangeMessage: function(e){
         this.setState({message: e.target.value})
     },
+    sendMail: function(e){
+        e.preventDefault();
+        var emailDetails = {
+            
+        };
+        //Push the properties to db
+        $.ajax({
+            url: "/api/contact",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+            data: emailDetails,
+            scope: this,
+            complete: function(response) {
+                console.log("Completed sending the email", response);
+            }.bind(this),
+
+            success: function(response) {
+                console.log("Success sending the email", response);
+            }.bind(this),
+
+            error: function(response) {
+                console.log("Error sending the email", response);
+            }.bind(this)
+        });
+    },
     render: function(){
         return (
             <div className="col-xs-12 col-sm-12 col-md-5 col-md-offset-1 col-lg-5 col-md-offset-1 contactForm">
                 <h5>Send us a message</h5>
-                <form action='/api/contact' name='contact' id='contact' method='post'>
+                <form name='contact' id='contact'>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <input type="text" name="name" id="name" value={this.state.name} onChange={this.onChangeName} placeholder="Name" />
                     </div>
@@ -99,7 +125,7 @@ var FormSection = React.createClass({
                         <textarea name="message" id="message" value={this.state.message} onChange={this.onChangeMessage} placeholder="Message"></textarea>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <button type="submit" name="submit" id="submit" className="btn btn-danger register">SEND</button>
+                        <button type="submit" name="submit" id="submit" className="btn btn-danger register" onClick={this.sendMail} >SEND</button>
                     </div>
                 </form>
             </div>
