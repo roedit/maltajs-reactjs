@@ -81,8 +81,12 @@ var FormSection = React.createClass({
     },
     sendMail: function(e){
         e.preventDefault();
+        // TODO fill in with the data
         var emailDetails = {
-            
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            message: this.state.message
         };
         //Push the properties to db
         $.ajax({
@@ -97,6 +101,12 @@ var FormSection = React.createClass({
 
             success: function(response) {
                 console.log("Success sending the email", response);
+                this.setState({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    message: ''
+                });
             }.bind(this),
 
             error: function(response) {

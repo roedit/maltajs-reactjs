@@ -51,11 +51,13 @@ module.exports= function(app) {
         var client = nodemailer.createTransport(sgTransport(options));
 
         var email = {
-          from: 'contact@maltajs.com',
-          to: 'boggdan.dumitriu@gmail.com',
+          from: req.body.email,
+          to: 'boggdan.dumitriu@gmail.com, tzuuc@yahoo.com, contact@maltajs.com',
           subject: 'MaltaJs Conference 2015',
           text: '',
-          html: '<b>This a message from - '+ req.body.name + '<br>' + req.body.message + '</b>'
+          html: 'This a message from: '+ req.body.name + '<br>' +
+                '<p>Phone no: ' + req.body.phone + '</p></br>' +
+                '<p>Message: ' + req.body.message + '</p>' 
         };
 
         client.sendMail(email, function(err, info){
