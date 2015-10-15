@@ -1,48 +1,41 @@
+/**
+ * Include ReactJs
+ */
 var React = require('react');
+/**
+ * Include React dom
+ */
+var ReactDom = require('react-dom');
+console.log(ReactDom);
+/**
+ * Include Jquery
+ */
 var $ = require('jquery');
+/**
+ * Include Bootstrap
+ */
 var Bootstrap = require('bootstrap');
+console.log(Bootstrap);
+/**
+ * Include Perfect Scrollbar
+ */
 var Ps = require('scrollbar');
 /**
- * Main page content render
+ * Banner - This is the main content for the banner
  */
-var App = React.createClass({
-    // React module
-    render: function() {
+var Banner = React.createClass({
+    render: function(){
         return (
-        	<div id="container">
-                <Header />
-        		<section id="home" className="row-fluid home">
-                    <h2>MaltaJS conference</h2>
-                    <h3>Javascript focused community in Malta</h3>
-                    <p>
-                        7th of NOVEMBER | BETSSON EXPERIENCE CENTER | BY
-                        <a target="_blank" href="http://about.betsson.com/en/company-information/">
-                            <img className="betssonHeader" src="/client/images/betsson_logo.png"></img>
-                        </a>
-                    </p>
-                </section>
-
-                <Subscribe />
-
-        		<section id="schedule" className="row schedule">
-                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <h4>Schedule</h4>
-                    </div>
-                    <Schedule />
-                </section>
-
-                <Speakers />
-        	    <Sponsors />
-                <Contact />
-
-                <section id="location" className="row location">
-                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <h4>Location</h4>
-                    </div>
-                    <Location />
-                </section>
-                <Footer />
-        	</div>
+            <section id="home" className="row banner">
+                <h2>MaltaJS conference</h2>
+                <h3>Javascript focused community in Malta</h3>
+                <p>
+                    7th of NOVEMBER | BETSSON EXPERIENCE CENTER | BY
+                    <a target="_blank" href="http://about.betsson.com/en/company-information/">
+                        <img className="betssonHeader" src="/client/images/betsson_logo.png"></img>
+                    </a>
+                </p>
+            </section>
         );
     }
 });
@@ -50,6 +43,7 @@ var App = React.createClass({
  * Contact page- This is the main content for the contact page
  */
 var Contact = React.createClass({
+   
     render: function(){
         return (
             <section id="contact" className="row contact">
@@ -126,11 +120,46 @@ var FormSection = React.createClass({
     onChangeMessage: function(e){
         this.setState({message: e.target.value})
     },
+    sendMail: function(e){
+        e.preventDefault();
+        // TODO fill in with the data
+        var emailDetails = {
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            message: this.state.message
+        };
+        //Push the properties to db
+        $.ajax({
+            url: "/api/contact",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+            data: emailDetails,
+            scope: this,
+            complete: function(response) {
+                console.log("Completed sending the email", response);
+            }.bind(this),
+
+            success: function(response) {
+                console.log("Success sending the email", response);
+                this.setState({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    message: ''
+                });
+            }.bind(this),
+
+            error: function(response) {
+                console.log("Error sending the email", response);
+            }.bind(this)
+        });
+    },
     render: function(){
         return (
             <div className="col-xs-12 col-sm-12 col-md-5 col-md-offset-1 col-lg-5 col-md-offset-1 contactForm">
                 <h5>Send us a message</h5>
-                <form action='/api/contact' name="contact" id="contact" method='post'>
+                <form name='contact' id='contact'>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <input type="text" name="name" id="name" value={this.state.name} onChange={this.onChangeName} placeholder="Name" />
                     </div>
@@ -141,13 +170,13 @@ var FormSection = React.createClass({
                     <div className="clearfix visible-xs-block"></div>
 
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input type="text" name="phone" id="phone"value={this.state.phone} onChange={this.onChangePhone} placeholder="Phone"/>
+                        <input type="text" name="phone" id="phone" value={this.state.phone} onChange={this.onChangePhone} placeholder="Phone"/>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <textarea value={this.state.message} name="message" id="message" onChange={this.onChangeMessage} placeholder="Message"></textarea>
+                        <textarea name="message" id="message" value={this.state.message} onChange={this.onChangeMessage} placeholder="Message"></textarea>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
-                        <button className="btn btn-danger register" type="submit" name="submit" id="submit">SEND</button>
+                        <button type="submit" name="submit" id="submit" className="btn btn-danger register" onClick={this.sendMail} >SEND</button>
                     </div>
                 </form>
             </div>
@@ -307,115 +336,162 @@ var Footer = React.createClass({
 /**
  * Header section
  */
+var Navbar = Bootstrap.Navbar;
+var Nav = Bootstrap.Nav;
+var NavBrand = Bootstrap.NavBrand;
+var NavItem = Bootstrap.NavItem;
+var CollapsibleNav = Bootstrap.CollapsibleNav;
 var Header = React.createClass({
-	onClick: function(target, e){
-    	console.log(target, e);
-    
-    	$('html, body').animate({
-    		scrollTop : $(e.target.hash).position().top
-    	  }, 800);
-    	
-    	e.preventDefault();
-  	},
-    render: function(){
+    onClick: function (target, e) {
+        console.log(target, e);
+
+        $('html, body').animate({
+            scrollTop: $(e.target.hash).position().top
+        }, 800);
+
+        e.preventDefault();
+    },
+    render: function () {
         return (
-            <header className="header col-xs-12 col-sm-12 col-md-12 header-row">
-            	<nav id='menu' role="navigation">
-	    			<div className="logo"></div>
-		        	
-		        	<ul className="menu"> 
-		        		<li><a href="#home" data-url='header' onClick={this.onClick.bind(null, 'target')} value='Home section'>Home</a></li>
-	                    <li><a href="#subscribe" data-url='subscribe' onClick={this.onClick.bind(null, 'target')} value='Subscribe'>Subscribe</a></li>
-		        		<li><a href="#schedule" data-url='schedule' onClick={this.onClick.bind(null, 'target')} value='Schedule'>Schedule</a></li>
-						<li><a href="#speakers" data-url='speakers' onClick={this.onClick.bind(null, 'target')} value='Speakers'>Speakers</a></li>
-						<li><a href="#sponsors" data-url='sponsors' onClick={this.onClick.bind(null, 'target')} value='Sponsors'>Sponsors</a></li>
-		        		<li><a href="#location" data-url='location' onClick={this.onClick.bind(null, 'target')} value='Location'>Location</a></li>
-		        	</ul>
-	        	</nav>
-		    </header>
+            <header className="col-xs-12 col-sm-12 col-md-12 menu">
+                <Navbar toggleNavKey={0}>
+                    <NavBrand>
+                        <a href="#home" data-url='home' onClick={this.onClick.bind(null, 'target')} value='Home'>
+                            <div className="logo"></div>
+                        </a>
+                    </NavBrand>
+                    <CollapsibleNav eventKey={0}> {/* This is the eventKey referenced */}
+                        <Nav navbar right>
+                            <NavItem eventKey={2} href="#subscribe" data-url='subscribe'
+                                     onClick={this.onClick.bind(null, 'target')} value='Subscribe'>Subscribe</NavItem>
+                            <NavItem eventKey={2} href="#schedule" data-url='schedule'
+                                     onClick={this.onClick.bind(null, 'target')} value='Schedule'>Schedule</NavItem>
+                            <NavItem eventKey={2} href="#speakers" data-url='speakers'
+                                     onClick={this.onClick.bind(null, 'target')} value='Speakers'>Speakers</NavItem>
+                            <NavItem eventKey={2} href="#sponsors" data-url='sponsors'
+                                     onClick={this.onClick.bind(null, 'target')} value='Sponsors'>Sponsors</NavItem>
+                            <NavItem eventKey={2} href="#location" data-url='location'
+                                     onClick={this.onClick.bind(null, 'target')} value='Location'>Location</NavItem>
+                            <NavItem eventKey={1} href="#contact" data-url='contact'
+                                     onClick={this.onClick.bind(null, 'target')} value='Contact'>Contact</NavItem>
+                        </Nav>
+                    </CollapsibleNav>
+                </Navbar>
+            </header>
         );
     }
 });
 
 /**
- * Location section
+ * LOCATION - This is the main content for the location page
+ */
+var Location = React.createClass({
+    render: function(){
+        return (
+            <section id="location" className="row location">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                <h4>Location</h4>
+            </div>
+            <Map/>
+            </section>
+        );
+    }
+});
+
+/**
+ * Map container and initialize the google map
  */
  // Google maps api key
  // AIzaSyApbfoXOpdt8v4wB8spClqDaCsOtOQr4CQ
-var Location = React.createClass({
-	 getDefaultProps: function () {
-	        return {
-	            initialZoom: 17,
-	            mapCenterLat: 35.897705, 
-	            mapCenterLng: 14.494386
-	        };
-	    },
-	    componentDidMount: function (rootNode) {
-	    	var image = {
-	    		url: 'client/images/map_marker.png',
-			    // This marker is 20 pixels wide by 32 pixels high.
-			    size: new google.maps.Size(70, 70),
-			    // The origin for this image is (0, 0).
-			    origin: new google.maps.Point(0, 0),
-			    // The anchor for this image is the base of the flagpole at (0, 32).
-			    anchor: new google.maps.Point(12, 70)
-	    	};
+var Map = React.createClass({
+    getDefaultProps: function () {
+        return {
+            initialZoom: 17,
+            mapCenterLat: 35.897705,
+            mapCenterLng: 14.494386
+        };
+    },
+    componentDidMount: function (rootNode) {
+        var image = {
+            url: 'client/images/map_marker.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(70, 70),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(12, 70)
+        };
 
-	    	var contentString = '<div id="content">'+
-		        '<div id="location-details">'+
-			      '</div>'+
-				      '<h1 id="firstHeading" class="firstHeading"><b>Location Details:</b></h1>'+
-					      '<div id="bodyContent">'+
-						      '<p>Betsson Experience Centre</p>'+
-						      '<p>8th Floor</p>'+
-					      '</div>'+
-			      '</div>'+
-			    '</div>';
+        var contentString = '<div id="content">'+
+            '<div id="location-details">'+
+                '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading"><b>Location Details:</b></h1>'+
+                    '<div id="bodyContent">'+
+                        '<p>Betsson Experience Centre</p>'+
+                        '<p>8th Floor</p>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
 
-			var infowindow = new google.maps.InfoWindow({
-			   content: contentString
-			});
+        var infowindow = new google.maps.InfoWindow({
+           content: contentString
+        });
 
-			
-	    	
-	        var mapOptions = {
-	            center: this.mapCenterLatLng(),
-	            zoom: this.props.initialZoom,
-	            scrollwheel: false,
-			    navigationControl: false,
-			    mapTypeControl: false,
-			    scaleControl: false
-	        },
-	       
-	        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	        var marker = new google.maps.Marker({
-	        	position: this.mapCenterLatLng(), 
-	        	title: 'MaltaJS', 
-	        	map: map,
-	        	draggable: false,
-	        	icon: image
-	        });
+        var mapOptions = {
+            center: this.mapCenterLatLng(),
+            zoom: this.props.initialZoom,
+            scrollwheel: false,
+            navigationControl: false,
+            mapTypeControl: false,
+            scaleControl: false
+        },
 
-	        marker.addListener('click', function() {
-			   infowindow.open(map, marker);
-			});
-	        this.setState({map: map});
-	    },
-	    mapCenterLatLng: function () {
-	        var props = this.props;
-	        return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
-	    },
-	    render: function () {
-	        return (
-				<div className='map-gic' id='map'></div>
-	        );
-	    }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: this.mapCenterLatLng(),
+            title: 'MaltaJS',
+            map: map,
+            draggable: false,
+            icon: image
+        });
+
+        marker.addListener('click', function() {
+           infowindow.open(map, marker);
+        });
+        this.setState({map: map});
+    },
+    mapCenterLatLng: function () {
+        var props = this.props;
+        return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
+    },
+    render: function () {
+        return (
+            <div className='map-gic' id='map'></div>
+        );
+    }
 });
+/**
+ * SCHEDULE- This is the main content for the schedule page
+ */
+var Schedule = React.createClass({
+    render: function(){
+        return (
+            <section id="schedule" className="row schedule">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 textCenter">
+                    <h4>Schedule</h4>
+                </div>
+                <ScheduleList/>
+            </section>
+        );
+    }
+});
+
+
 
 /**
  * SCHEDULE LIST- This is the main content for the schedule page
  */
-var Schedule = React.createClass({
+var ScheduleList = React.createClass({
     getInitialState: function(){
         return {
             data: [{
@@ -622,7 +698,7 @@ var ScheduleSpeaker = React.createClass({
     }
 });
 /**
- * SPEAKERS LIST- This is the main content for the schedule page
+ * SPEAKERS LIST- This is the main content for the speakers page
  */
 var Speakers = React.createClass({
     render: function(){
@@ -636,6 +712,7 @@ var Speakers = React.createClass({
         );
     }
 });
+
 var SpeakersList = React.createClass({
     getInitialState: function(){
         return {
@@ -845,16 +922,16 @@ var SpeakerProfile = React.createClass({
 var Sponsors = React.createClass({
     render: function(){
         return (
-            <section id="sponsors" className="row-fluid sponsors text-center">
+            <section id="sponsors" className="row sponsors text-center">
 				<h3>Partener with MaltaJs 2015</h3>
             	<h6>Find out more about the opportunities to become one of the sponsors of MaltaJs in 2015.</h6>
             	<a href="mailto:contact@maltajs.com" className="sponsor_button" data-text="GET IN TOUCH"><span>GET IN TOUCH</span></a>
             	<div className='sponsors-logo row'>
             		<p>Sponsors</p>
-	            	<a href="https://www.betsson.com/" target="_blank"> <img src="/client/images/sponsors/betsafe.jpg" /> </a>
-	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/casinoeuro.jpg" /> </a>
-	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/mrsmithcasino.jpg" /> </a>
-	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/sportsbook.jpg" /> </a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/betsafe.jpg"/></a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/casinoeuro.jpg"/></a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/mrsmithcasino.jpg"/></a>
+	            	<a href="https://www.betsson.com/" target="_blank"><img src="/client/images/sponsors/sportsbook.jpg"/></a>
             	</div>
             </section>
         );
@@ -1068,6 +1145,31 @@ var Subscriber = React.createClass({
         );
     }
 });
+/**
+ * Main page content render
+ */
+var App = React.createClass({
+    // React module
+    render: function() {
+        return (
+            <div id="container">
+                <Header/>
+                <Banner/>
+                <Subscribe/>
+                <Schedule/>
+                <Speakers/>
+                <Sponsors/>
+                <Contact/>
+                <Location/>
+                <Footer/>
+            </div>
+        );
+    }
+});
+/**
+ * React render the main content
+ * @type {Element}
+ */
 var mainContainer = document.getElementById('main');
 React.render(<App/>, mainContainer);
 

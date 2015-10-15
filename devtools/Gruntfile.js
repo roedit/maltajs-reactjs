@@ -125,9 +125,10 @@ module.exports = function (grunt) {
                         }]
                     ],
                     alias: [
-                        '../public/client/thirdparty/react-0.13.3/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/react-0.14.0/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/react-0.14.0/react-dom.min.js:react-dom',
                         '../public/client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js:jquery',
-                        '../public/client/thirdparty/react-bootstrap/react-bootstrap.min.js:bootstrap',
+                        '../public/client/thirdparty/react-bootstrap-0.27.1/react-bootstrap.min.js:bootstrap',
                         '../public/client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js:scrollbar'
                     ],
                     browserifyOptions: {
@@ -141,9 +142,10 @@ module.exports = function (grunt) {
             production: {
                 options: {
                     alias: [
-                        '../public/client/thirdparty/react-0.13.3/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/react-0.14.0/react-with-addons.min.js:react',
+                        '../public/client/thirdparty/react-0.14.0/react-dom.min.js:react-dom',
                         '../public/client/thirdparty/jquery-2.1.4/jquery-2.1.4.min.js:jquery',
-                        '../public/client/thirdparty/react-bootstrap/react-bootstrap.min.js:bootstrap',
+                        '../public/client/thirdparty/react-bootstrap-0.27.1/react-bootstrap.min.js:bootstrap',
                         '../public/client/thirdparty/perfect-scrollbar/perfect-scrollbar.min.js:scrollbar'
                     ]
                 },

@@ -4,7 +4,7 @@
 var Banner = React.createClass({
     render: function(){
         return (
-            <section id="home" className="row-fluid home">
+            <section id="home" className="row banner">
                 <h2>MaltaJS conference</h2>
                 <h3>Javascript focused community in Malta</h3>
                 <p>

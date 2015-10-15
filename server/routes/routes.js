@@ -1,12 +1,12 @@
 module.exports= function(app) {
     var model     = require('../models/schema');
-    var nodemailer = require('nodemailer');
-    var sgTransport = require('nodemailer-sendgrid-transport');
+    var nodemailer = require('../../devtools/node_modules/nodemailer');
+    var sgTransport = require('../../devtools/node_modules/nodemailer-sendgrid-transport');
     /**
      * Get subscribers list
      * http://localhost:3000/api/subscribers
      */
-    app.get('/api/subscribers', function(req, res) {
+    app.get('/api/joined', function(req, res) {
         var query = model.Subscribers.find();
 
         query.exec(function(err,subscribers){
