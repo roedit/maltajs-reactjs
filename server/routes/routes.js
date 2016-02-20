@@ -42,10 +42,7 @@ module.exports= function(app) {
         console.log(req.body);
 
         var options = {
-          auth: {
-            api_user: 'maltajs',
-            api_key: 'maltajs2015'
-          }
+          auth: {}
         }
 
         var client = nodemailer.createTransport(sgTransport(options));
